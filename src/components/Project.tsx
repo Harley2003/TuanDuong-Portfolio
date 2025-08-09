@@ -1,52 +1,75 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
+import { useRef, useState, useMemo } from "react";
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
+const categories = ["All", "Website", "Mobile"];
+
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  github: string;
+  live: string;
+  category: string;
+}
+
 const projects = [
   {
     id: 1,
-    title: "E-Commerce Platform",
+    title: "Learning Management System",
     description:
-      "A modern e-commerce platform built with Next.js, TypeScript, and Stripe integration.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
-    github: "#",
-    live: "#"
+      "A web-based platform for creating, managing, and delivering online courses, allowing learners to access content anytime, interact in real time, track progress, and receive updates, while instructors easily manage courses, users, and performance analytics.",
+    image: "/images/lms.png",
+    technologies: [
+      "TypeScript",
+      "Next.js",
+      "Tailwind CSS",
+      "Express.js",
+      "MongoDB"
+    ],
+    github: "https://github.com/Harley2003/Learning-Management-System",
+    live: "",
+    category: "Website"
   },
   {
     id: 2,
-    title: "Task Management App",
+    title: "Manager Employee System",
     description:
-      "A collaborative task management application with real-time updates and team features.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
-    github: "#",
-    live: "#"
-  },
-  {
-    id: 3,
-    title: "Weather Dashboard",
-    description:
-      "A beautiful weather dashboard with interactive charts and location-based forecasts.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Vue.js", "Chart.js", "OpenWeather API", "CSS3"],
-    github: "#",
-    live: "#"
+      "A web-based platform for managing employee information, allowing admins to oversee and update all records while staff can view and manage their own profiles—streamlining communication and personnel management.",
+    image: "/images/mes.png",
+    technologies: [
+      "JavaScript",
+      "React",
+      "Material UI",
+      "Express.js",
+      "MongoDB"
+    ],
+    github: "https://github.com/Harley2003/Manager-Employee",
+    live: "",
+    category: "Website"
   },
   {
     id: 4,
-    title: "Portfolio Website",
+    title: "Quizzy Website",
     description:
-      "A responsive portfolio website with smooth animations and modern design.",
-    image: "/placeholder.svg?height=400&width=600",
-    technologies: ["Next.js", "Framer Motion", "Tailwind CSS", "TypeScript"],
-    github: "#",
-    live: "#"
+      "A web-based learning platform where users can create flashcards, practice with interactive quizzes, track their progress, and enhance their knowledge through engaging study tools.",
+    image: "/images/qw.png",
+    technologies: [
+      "JavaScript",
+      "React",
+      "Ant Design",
+      "Express.js",
+      "MongoDB"
+    ],
+    github: "https://github.com/Harley2003/Quizzy",
+    live: "",
+    category: "Website"
   }
 ];
 
@@ -54,13 +77,24 @@ export default function Project() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredProjects: Project[] = useMemo(
+    () =>
+      selectedCategory === "All"
+        ? projects
+        : projects.filter((p) => p.category === selectedCategory),
+    [selectedCategory]
+  );
 
   const nextProject = () => {
-    setCurrentIndex((prev) => (prev + 1) % projects.length);
+    setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
   };
 
   const prevProject = () => {
-    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    setCurrentIndex(
+      (prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length
+    );
   };
 
   return (
@@ -70,24 +104,41 @@ export default function Project() {
       ref={ref}
     >
       <div className="max-w-7xl mx-auto">
+        {/* Tiêu đề */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Featured Projects
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             Here are some of my recent projects that showcase my skills and
-            passion for creating exceptional web experiences.
+            passion.
           </p>
         </motion.div>
 
+        {/* Nút lọc danh mục */}
+        <div className="flex justify-center gap-3 mb-12">
+          {categories.map((cat) => (
+            <Button
+              key={cat}
+              variant={selectedCategory === cat ? "default" : "outline"}
+              onClick={() => {
+                setSelectedCategory(cat);
+                setCurrentIndex(0);
+              }}
+            >
+              {cat}
+            </Button>
+          ))}
+        </div>
+
         {/* Desktop Grid View */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 50 }}
@@ -97,7 +148,7 @@ export default function Project() {
             >
               <div className="relative overflow-hidden">
                 <Image
-                  src={project.image || "/placeholder.svg"}
+                  src={project.image || "/images/placeholder.svg"}
                   alt={project.title}
                   width={600}
                   height={400}
@@ -105,12 +156,26 @@ export default function Project() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <Button size="sm" variant="secondary">
-                    <Github className="h-4 w-4" />
-                  </Button>
-                  <Button size="sm" variant="secondary">
-                    <ExternalLink className="h-4 w-4" />
-                  </Button>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button size="sm" variant="secondary">
+                      <Github className="h-4 w-4" />
+                    </Button>
+                  </a>
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Button size="sm" variant="secondary">
+                        <ExternalLink className="h-4 w-4" />
+                      </Button>
+                    </a>
+                  )}
                 </div>
               </div>
 
@@ -148,7 +213,7 @@ export default function Project() {
                 animate={{ x: `-${currentIndex * 100}%` }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                {projects.map((project) => (
+                {filteredProjects.map((project) => (
                   <div key={project.id} className="w-full flex-shrink-0">
                     <div className="bg-card border border-border/50 rounded-xl overflow-hidden">
                       <Image
@@ -192,6 +257,7 @@ export default function Project() {
               </motion.div>
             </div>
 
+            {/* Nút điều hướng */}
             <Button
               variant="outline"
               size="icon"
@@ -209,8 +275,9 @@ export default function Project() {
               <ChevronRight className="h-4 w-4" />
             </Button>
 
+            {/* Indicator */}
             <div className="flex justify-center gap-2 mt-6">
-              {projects.map((_, index) => (
+              {filteredProjects.map((_, index) => (
                 <button
                   key={index}
                   className={`w-2 h-2 rounded-full transition-colors ${

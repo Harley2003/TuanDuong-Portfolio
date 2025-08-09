@@ -7,13 +7,26 @@ import {
   MapPin,
   Code,
   Briefcase,
-  PersonStanding
+  PersonStanding,
+  University
 } from "lucide-react";
 
 const experiences = [
   {
     id: 1,
-    year: "2024",
+    year: "09/2021 – 01/2026",
+    title: "FPT University, Ha Noi",
+    company: "",
+    description: [
+      "Major: Software Engineering",
+      "GPA: 3.2/4.0",
+      "Member of FU Debate Club"
+    ],
+    icon: University
+  },
+  {
+    id: 2,
+    year: "7/2024 - 12/2024",
     title: "Intern Frontend Developer",
     company: "JVB VIET NAM JOINT STOCK COMPANY",
     description: [

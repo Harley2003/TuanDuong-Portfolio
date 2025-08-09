@@ -14,7 +14,6 @@ import {
   SiNodedotjs,
   SiExpress,
   SiMongodb,
-  SiGit,
   SiDocker,
   SiFigma,
   SiJest,
