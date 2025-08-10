@@ -10,6 +10,7 @@ import Project from "@/components/Project";
 import Skill from "@/components/Skill";
 import SplashScreen from "@/components/SplashScreen";
 import { AnimatePresence } from "framer-motion";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,6 +29,7 @@ export default function Home() {
             <Project />
             <Certificates />
             <Contact />
+            <Footer />
           </>
         )}
       </AnimatePresence>

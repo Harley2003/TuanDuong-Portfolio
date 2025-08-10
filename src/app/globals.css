@@ -132,6 +132,10 @@ html {
   /* You can adjust the colors and direction as needed */
 }
 
+.splash-gradient-web3 {
+  background: linear-gradient(135deg, #7C3AED 0%, #EC4899 50%, #0EA5E9 100%);
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
