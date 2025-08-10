@@ -55,7 +55,7 @@ export default function About() {
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I am a fresher Front-end Developer with a strong passion for web
+            I am a fresher Full Stack Developer with a strong passion for web
             technologies and a desire to learn and grow. I am looking for an
             opportunity to start my career, apply my skills in real projects,
             and become a professional developer in the future.

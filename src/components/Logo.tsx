@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function Logo() {
   const { theme } = useTheme();
 
-  const logoSrc = theme === "light" ? "/LogoDark.png" : "/LogoLight.png";
+  const logoSrc = theme === "light" ? "/images/LogoDark.png" : "/images/LogoLight.png";
 
   return (
     <Image

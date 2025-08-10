@@ -7,11 +7,11 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Harley - Frontend Developer",
+  title: "Harley - Full Stack Developer",
   description:
-    "Creative frontend developer specializing in React, Next.js, and modern web technologies",
+    "Creative full stack developer specializing in React, Next.js, and modern web technologies",
   keywords: [
-    "frontend developer",
+    "full stack developer",
     "react",
     "nextjs",
     "typescript",
@@ -19,9 +19,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Harley" }],
   openGraph: {
-    title: "Harley - Frontend Developer",
+    title: "Harley - Full Stack Developer",
     description:
-      "Creative frontend developer specializing in React, Next.js, and modern web technologies",
+      "Creative full stack developer specializing in React, Next.js, and modern web technologies",
     type: "website"
   }
 };

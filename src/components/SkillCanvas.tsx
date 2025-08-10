@@ -17,25 +17,28 @@ const calculatePositions = (count: number, radius: number) => {
 
     const x = Math.cos(theta) * radiusAtY * radius;
     const z = Math.sin(theta) * radiusAtY * radius;
-    
+
     positions.push([x, y * radius * 0.8, z]);
   }
   return positions;
 };
 
 const SkillCanvas = () => {
-  const positions = useMemo(() => calculatePositions(allSkills.length, 4.5), []);
+  const positions = useMemo(
+    () => calculatePositions(allSkills.length, 4.5),
+    []
+  );
 
   return (
     <div className="relative w-full h-full">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-pink-500/5 rounded-3xl" />
-      
+
       {/* Canvas */}
       <Canvas
         camera={{ position: [0, 0, 14], fov: 45 }}
-        gl={{ 
-          antialias: true, 
+        gl={{
+          antialias: true,
           alpha: true,
           powerPreference: "high-performance"
         }}
@@ -47,10 +50,10 @@ const SkillCanvas = () => {
         <directionalLight position={[10, 10, 5]} intensity={0.8} />
         <directionalLight position={[-10, -10, -5]} intensity={0.3} />
         <pointLight position={[0, 0, 10]} intensity={0.5} color="#ffffff" />
-        
+
         {/* Environment for better reflections */}
         <Environment preset="city" />
-        
+
         <Suspense fallback={null}>
           {allSkills.map((skill, index) => (
             <SkillIcon3D
@@ -75,11 +78,6 @@ const SkillCanvas = () => {
           dampingFactor={0.05}
         />
       </Canvas>
-
-      {/* Decorative Elements */}
-      <div className="absolute top-4 left-4 w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-      <div className="absolute top-8 right-8 w-1 h-1 bg-purple-400 rounded-full animate-ping" />
-      <div className="absolute bottom-6 left-8 w-1.5 h-1.5 bg-pink-400 rounded-full animate-pulse" />
     </div>
   );
 };

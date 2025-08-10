@@ -1,100 +1,183 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowDown, Mail, Download } from "lucide-react";
+import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { TypeAnimation } from "react-type-animation";
 import { Button } from "@/components/ui/button";
 import AnimatedBackground from "./AnimatedBackground";
-import Avatar from "./Avatar";
+import Image from "next/image";
 
 export default function Introduce() {
   const scrollToAbout = () => {
     document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const socialLinks = [
+    { icon: FaGithub, href: "https://github.com/Harley2003", label: "GitHub" },
+    {
+      icon: FaLinkedin,
+      href: "https://linkedin.com/in/your-profile",
+      label: "LinkedIn"
+    },
+    { icon: Mail, href: "mailto:nguyenkimtuanduong@gmail.com", label: "Email" }
+  ];
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden safe-area-top"
     >
-      {/* Background animation for Introduce*/}
+      {/* Enhanced Background */}
       <AnimatedBackground />
 
-      <div className="relative z-10 px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between">
-          {/* Left: Avatar or Model Animation */}
+      {/* Floating Elements - Reduced on mobile */}
+      <div className="absolute inset-0 pointer-events-none">
+        {Array.from({ length: 6 }).map((_, i) => (
           <motion.div
-            className="w-full md:max-w-[400px] lg:w-1/2 flex justify-center mb-12 lg:mb-0"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            key={`floating-${i}`}
+            className="absolute w-1 h-1 sm:w-2 sm:h-2 bg-primary/20 rounded-full"
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 2,
+              repeat: Infinity,
+              delay: Math.random() * 2
+            }}
+            style={{
+              left: `${20 + Math.random() * 60}%`,
+              top: `${20 + Math.random() * 60}%`
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 container-responsive section-padding-responsive">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-8rem)]">
+          {/* Avatar Section */}
+          <motion.div
+            className="order-2 lg:order-1 flex justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2, type: "spring" }}
           >
-            {/* Avatar Animation */}
-            <Avatar />
+            <div className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-full blur-2xl sm:blur-3xl animate-pulse-glow" />
+              <div className="relative">
+                {/* <Avatar /> */}
+                <Image
+                  src="/images/avatar.png"
+                  alt="Avatar"
+                  width={800}
+                  height={800}
+                  className="rounded-full object-cover"
+                />
+              </div>
+            </div>
           </motion.div>
 
-          {/* Right: Original Content */}
+          {/* Content Section */}
           <motion.div
-            className="w-full lg:w-1/2 text-center lg:text-left"
+            className="order-1 lg:order-2 text-center lg:text-left space-y-6 sm:space-y-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <motion.h1
-              className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-snug text-center lg:text-left"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              <span className="inline-block w-[300px] sm:w-[400px] lg:w-[600px] xl:w-[800px]">
-                <span className="mr-2">Hi, I’m</span>
-                <TypeAnimation
-                  sequence={["Tuan Duong", 2000, "a Frontend Developer", 3000]}
-                  wrapper="span"
-                  speed={50}
-                  repeat={Infinity}
-                  className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent"
-                />
-              </span>
-            </motion.h1>
-
+            {/* Main Heading */}
             <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-16"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 1 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="space-y-3 sm:space-y-4"
+            >
+              <h1 className="text-responsive-5xl sm:text-responsive-6xl font-bold leading-tight">
+                <span className="block text-foreground/90 mb-2">
+                  Hi, I&apos;m
+                </span>
+                <span className="block bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <TypeAnimation
+                    sequence={["Harley", 2000, "a Full Stack Developer", 2000]}
+                    wrapper="span"
+                    speed={50}
+                    repeat={Infinity}
+                    style={{
+                      background:
+                        "linear-gradient(135deg, hsl(var(--primary)) 0%, #8b5cf6 50%, #ec4899 100%)",
+                      WebkitBackgroundClip: "text",
+                      backgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      textShadow: "0 0 30px hsl(var(--primary) / 0.5)"
+                    }}
+                  />
+                </span>
+              </h1>
+
+              <p className="text-responsive-base sm:text-responsive-lg text-muted-foreground max-w-2xl leading-relaxed mx-auto lg:mx-0">
+                Passionate about creating exceptional digital experiences with
+                modern web technologies. I transform ideas into beautiful,
+                functional, and user-friendly applications.
+              </p>
+            </motion.div>
+
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
             >
               <Button
                 size="lg"
                 onClick={scrollToAbout}
-                className="group cursor-pointer"
+                className="w-full sm:w-auto group relative overflow-hidden bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-medium hover:shadow-strong transition-all duration-300 focus-ring btn-responsive touch-target"
               >
-                View My Work
-                <ArrowDown className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform" />
+                <span className="relative z-10 flex items-center justify-center">
+                  View My Work
+                  <ArrowDown className="ml-2 h-4 w-4 group-hover:translate-y-1 transition-transform duration-300" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Button>
 
-              <div className="flex items-center gap-4">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="cursor-pointer"
-                >
-                  <Github className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="cursor-pointer"
-                >
-                  <Linkedin className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="cursor-pointer"
-                >
-                  <Mail className="h-4 w-4" />
-                </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto group glass hover:glass-strong border-primary/20 hover:border-primary/40 transition-all duration-300 focus-ring btn-responsive touch-target"
+              >
+                <Download className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
+                Download CV
+              </Button>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.4 }}
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
+            >
+              <span className="text-xs sm:text-sm text-muted-foreground font-medium">
+                Connect with me:
+              </span>
+              <div className="flex items-center gap-2 sm:gap-3">
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: 1.6 + index * 0.1 }}
+                    className="group relative p-2 sm:p-3 rounded-full glass hover:glass-strong border border-border/30 hover:border-primary/40 transition-all duration-300 focus-ring hover-lift touch-target"
+                    aria-label={social.label}
+                  >
+                    <social.icon className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                    <div className="absolute inset-0 rounded-full bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  </motion.a>
+                ))}
               </div>
             </motion.div>
           </motion.div>

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import GridBackground from "./GridBackground";
+import Image from "next/image";
 
 interface SplashScreenProps {
   onFinish: () => void;
@@ -53,6 +54,13 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
     >
       <GridBackground />
       <div className="text-center z-10">
+        <Image
+          src="/path/to/your/image.jpg"
+          alt="Splash Image"
+          layout="fill"
+          objectFit="cover"
+          className="absolute inset-0 z-0"
+        />
         <motion.h1
           variants={titleVariants}
           initial="hidden"
@@ -77,6 +85,12 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
         >
           {subtitle}
         </motion.p>
+
+        {/* Corner Decorations */}
+        <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-primary/30 rounded-tl-lg" />
+        <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-primary/30 rounded-tr-lg" />
+        <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-primary/30 rounded-bl-lg" />
+        <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-primary/30 rounded-br-lg" />
       </div>
     </motion.div>
   );

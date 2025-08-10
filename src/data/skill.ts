@@ -1,5 +1,11 @@
 import { DiMsqlServer, DiRedis } from "react-icons/di";
-import { FaJava, FaPhp } from "react-icons/fa";
+import {
+  FaComments,
+  FaJava,
+  FaLightbulb,
+  FaPhp,
+  FaUsers
+} from "react-icons/fa";
 import { FaGolang } from "react-icons/fa6";
 import { GrMysql } from "react-icons/gr";
 import {
@@ -85,12 +91,19 @@ export const skillCategories = [
       { name: "Jest", icon: SiJest, color: "#C21325" },
       { name: "Cypress", icon: SiCypress, color: "#17202C" }
     ]
+  },
+  {
+    title: "Soft Skills",
+    skills: [
+      { name: "Communication", icon: FaComments, color: "#F59E0B" },
+      { name: "Teamwork", icon: FaUsers, color: "#3B82F6" },
+      { name: "Problem Solving", icon: FaLightbulb, color: "#FACC15" }
+    ]
   }
 ];
 
-// Flatten all skills into a single array for 3D display
-export const allSkills = skillCategories.flatMap(category => 
-  category.skills.map(skill => ({
+export const allSkills = skillCategories.flatMap((category) =>
+  category.skills.map((skill) => ({
     ...skill,
     category: category.title
   }))
