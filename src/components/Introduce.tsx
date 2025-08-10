@@ -17,7 +17,7 @@ export default function Introduce() {
     { icon: FaGithub, href: "https://github.com/Harley2003", label: "GitHub" },
     {
       icon: FaLinkedin,
-      href: "https://linkedin.com/in/your-profile",
+      href: "https://linkedin.com/in/tuanduong-dev",
       label: "LinkedIn"
     },
     { icon: Mail, href: "mailto:nguyenkimtuanduong@gmail.com", label: "Email" }
@@ -99,7 +99,16 @@ export default function Introduce() {
                 </span>
                 <span className="block bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
                   <TypeAnimation
-                    sequence={["Harley", 2000, "a Full Stack Developer", 2000]}
+                    sequence={[
+                      "Tuan Duong", 
+                      2000, 
+                      "a Full Stack Developer", 
+                      2000,
+                      "a Software Engineer",
+                      2000,
+                      "a Blockchain Enthusiast",
+                      2000
+                    ]}
                     wrapper="span"
                     speed={50}
                     repeat={Infinity}
@@ -116,9 +125,10 @@ export default function Introduce() {
               </h1>
 
               <p className="text-responsive-base sm:text-responsive-lg text-muted-foreground max-w-2xl leading-relaxed mx-auto lg:mx-0">
-                Passionate about creating exceptional digital experiences with
-                modern web technologies. I transform ideas into beautiful,
-                functional, and user-friendly applications.
+                Passionate Full Stack Developer specializing in modern web technologies 
+                and blockchain solutions. I craft scalable, secure applications using 
+                React, Node.js, TypeScript, and emerging Web3 technologies. 
+                Committed to delivering exceptional user experiences and innovative digital solutions.
               </p>
             </motion.div>
 
@@ -145,6 +155,13 @@ export default function Introduce() {
                 variant="outline"
                 size="lg"
                 className="w-full sm:w-auto group glass hover:glass-strong border-primary/20 hover:border-primary/40 transition-all duration-300 focus-ring btn-responsive touch-target"
+                onClick={() => {
+                  // Create a link to download CV (you need to add your CV file to public folder)
+                  const link = document.createElement('a');
+                  link.href = '/cv/Tuan-Duong-CV.pdf'; // Add your CV file to public/cv/ folder
+                  link.download = 'Tuan-Duong-Full-Stack-Developer-CV.pdf';
+                  link.click();
+                }}
               >
                 <Download className="mr-2 h-4 w-4 group-hover:scale-110 transition-transform duration-300" />
                 Download CV

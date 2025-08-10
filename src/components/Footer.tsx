@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import Logo from "./Logo"; // Import Logo component
 
 export default function Footer() {
@@ -21,13 +21,13 @@ export default function Footer() {
           <p className="text-sm ml-2">
             {" "}
             {/* Added ml-2 for spacing */}
-            &copy; {new Date().getFullYear()} Harley. All rights reserved.
+            &copy; {new Date().getFullYear()} Tuan Duong - Full Stack Developer. All rights reserved.
           </p>
         </div>
 
         <div className="flex space-x-6">
           <a
-            href="https://github.com/your-github" // Replace with actual GitHub URL
+            href="https://github.com/Harley2003"
             target="_blank"
             rel="noopener noreferrer"
             className="text-card-foreground hover:text-primary transition-colors"
@@ -36,22 +36,13 @@ export default function Footer() {
             <Github size={24} />
           </a>
           <a
-            href="https://linkedin.com/in/your-linkedin" // Replace with actual LinkedIn URL
+            href="https://linkedin.com/in/tuanduong-dev"
             target="_blank"
             rel="noopener noreferrer"
             className="text-card-foreground hover:text-primary transition-colors"
             aria-label="LinkedIn"
           >
             <Linkedin size={24} />
-          </a>
-          <a
-            href="https://twitter.com/your-twitter" // Replace with actual Twitter URL
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-card-foreground hover:text-primary transition-colors"
-            aria-label="Twitter"
-          >
-            <Twitter size={24} />
           </a>
         </div>
       </div>

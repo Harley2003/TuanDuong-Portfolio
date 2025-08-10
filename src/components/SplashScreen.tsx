@@ -54,13 +54,6 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
     >
       <GridBackground />
       <div className="text-center z-10">
-        <Image
-          src="/path/to/your/image.jpg"
-          alt="Splash Image"
-          layout="fill"
-          objectFit="cover"
-          className="absolute inset-0 z-0"
-        />
         <motion.h1
           variants={titleVariants}
           initial="hidden"

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import About from "@/components/About";
+import CareerRoadmap from "@/components/CareerRoadmap";
 import Certificates from "@/components/Certificates";
 import Contact from "@/components/Contact";
 import Navigation from "@/components/Header";
@@ -25,6 +26,7 @@ export default function Home() {
             <Navigation />
             <Introduce />
             <About />
+            <CareerRoadmap />
             <Skill />
             <Project />
             <Certificates />

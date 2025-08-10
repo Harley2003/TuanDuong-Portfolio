@@ -24,14 +24,16 @@ const projects = [
     id: 1,
     title: "Learning Management System",
     description:
-      "A web-based platform for creating, managing, and delivering online courses, allowing learners to access content anytime, interact in real time, track progress, and receive updates, while instructors easily manage courses, users, and performance analytics.",
+      "A comprehensive web-based platform for creating, managing, and delivering online courses. Features real-time interactions, progress tracking, automated assessments, and advanced analytics dashboard for instructors and administrators.",
     image: "/images/lms.png",
     technologies: [
       "TypeScript",
       "Next.js",
       "Tailwind CSS",
       "Express.js",
-      "MongoDB"
+      "MongoDB",
+      "Socket.io",
+      "JWT"
     ],
     github: "https://github.com/Harley2003/Learning-Management-System",
     live: "",
@@ -39,16 +41,18 @@ const projects = [
   },
   {
     id: 2,
-    title: "Manager Employee System",
+    title: "Employee Management System",
     description:
-      "A web-based platform for managing employee information, allowing admins to oversee and update all records while staff can view and manage their own profiles—streamlining communication and personnel management.",
+      "Enterprise-grade web application for streamlining HR operations. Features role-based access control, employee profile management, attendance tracking, and comprehensive reporting with data visualization.",
     image: "/images/mes.png",
     technologies: [
       "JavaScript",
       "React",
       "Material UI",
       "Express.js",
-      "MongoDB"
+      "MongoDB",
+      "Chart.js",
+      "PDF Export"
     ],
     github: "https://github.com/Harley2003/Manager-Employee",
     live: "",
@@ -56,16 +60,18 @@ const projects = [
   },
   {
     id: 4,
-    title: "Quizzy Website",
+    title: "Quizzy Learning Platform",
     description:
-      "A web-based learning platform where users can create flashcards, practice with interactive quizzes, track their progress, and enhance their knowledge through engaging study tools.",
+      "Interactive learning platform with AI-powered quiz generation, spaced repetition algorithms, and collaborative study groups. Features real-time multiplayer quizzes and comprehensive learning analytics.",
     image: "/images/qw.png",
     technologies: [
       "JavaScript",
       "React",
       "Ant Design",
       "Express.js",
-      "MongoDB"
+      "MongoDB",
+      "WebRTC",
+      "OpenAI API"
     ],
     github: "https://github.com/Harley2003/Quizzy",
     live: "",

@@ -114,13 +114,50 @@
 }
 
 @layer base {
+  /* Disable transitions during initial hydration */
+  .theme-transition-disabled * {
+    transition: none !important;
+  }
+
   * {
     @apply border-border outline-ring/50;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Enhanced theme transitions */
+  html {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Smooth transitions for all interactive elements */
+  button, a, input, textarea, select {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Ensure proper theme transitions for common elements */
+  div, section, nav, header, footer, main, aside, article {
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* SVG icons and graphics */
+  svg {
+    transition: fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 

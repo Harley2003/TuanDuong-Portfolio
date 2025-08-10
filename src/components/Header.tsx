@@ -11,6 +11,7 @@ import ScrollProgress from "./ScrollProgress";
 const navItems = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
+  { name: "Career Roadmap", href: "#roadmap" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
   { name: "Certificates", href: "#certificates" },
@@ -98,7 +99,7 @@ export default function Navigation() {
                 <Logo />
               </div>
               <span className="ml-2 sm:ml-3 text-base sm:text-lg font-bold bg-gradient-to-r from-primary to-purple-500 bg-clip-text text-transparent">
-                Harley
+                Tuan Duong
               </span>
             </motion.div>
 
