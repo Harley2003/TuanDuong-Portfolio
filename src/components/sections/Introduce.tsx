@@ -1,27 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDown, Mail, Download } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { ArrowDown, Download } from "lucide-react";
 import { TypeAnimation } from "react-type-animation";
 import { Button } from "@/components/ui/button";
-import AnimatedBackground from "./AnimatedBackground";
+import { AnimatedBackground } from "@/components/animations";
+import { socialLinks } from "@/data";
 import Image from "next/image";
 
 export default function Introduce() {
   const scrollToAbout = () => {
     document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
   };
-
-  const socialLinks = [
-    { icon: FaGithub, href: "https://github.com/Harley2003", label: "GitHub" },
-    {
-      icon: FaLinkedin,
-      href: "https://linkedin.com/in/tuanduong-dev",
-      label: "LinkedIn"
-    },
-    { icon: Mail, href: "mailto:nguyenkimtuanduong@gmail.com", label: "Email" }
-  ];
 
   return (
     <section
@@ -100,13 +90,13 @@ export default function Introduce() {
                 <span className="block bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
                   <TypeAnimation
                     sequence={[
-                      "Tuan Duong", 
+                      "Hareley", 
                       2000, 
                       "a Full Stack Developer", 
                       2000,
                       "a Software Engineer",
                       2000,
-                      "a Blockchain Enthusiast",
+                      "a Problem Solver",
                       2000
                     ]}
                     wrapper="span"
@@ -126,8 +116,8 @@ export default function Introduce() {
 
               <p className="text-responsive-base sm:text-responsive-lg text-muted-foreground max-w-2xl leading-relaxed mx-auto lg:mx-0">
                 Passionate Full Stack Developer specializing in modern web technologies 
-                and blockchain solutions. I craft scalable, secure applications using 
-                React, Node.js, TypeScript, and emerging Web3 technologies. 
+                and scalable applications. I craft efficient, secure solutions using 
+                React, Node.js, TypeScript, and cutting-edge frameworks. 
                 Committed to delivering exceptional user experiences and innovative digital solutions.
               </p>
             </motion.div>

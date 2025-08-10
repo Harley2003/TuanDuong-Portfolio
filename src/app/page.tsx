@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import About from "@/components/About";
-import CareerRoadmap from "@/components/CareerRoadmap";
-import Certificates from "@/components/Certificates";
-import Contact from "@/components/Contact";
-import Navigation from "@/components/Header";
-import Introduce from "@/components/Introduce";
-import Project from "@/components/Project";
-import Skill from "@/components/Skill";
-import SplashScreen from "@/components/SplashScreen";
+import { 
+  About, 
+  CareerRoadmap, 
+  Certificates, 
+  Contact, 
+  Introduce, 
+  ProjectSection as Project, 
+  Skill 
+} from "@/components/sections";
+import { Header, Footer } from "@/components/layout";
+import { SplashScreen } from "@/components/animations";
 import { AnimatePresence } from "framer-motion";
-import Footer from "@/components/Footer";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,7 @@ export default function Home() {
           <SplashScreen onFinish={() => setIsLoading(false)} />
         ) : (
           <>
-            <Navigation />
+            <Header />
             <Introduce />
             <About />
             <CareerRoadmap />

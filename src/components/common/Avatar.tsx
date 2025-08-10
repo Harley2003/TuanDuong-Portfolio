@@ -4,7 +4,7 @@ import React from "react";
 import { Canvas } from "@react-three/fiber";
 import dynamic from "next/dynamic";
 
-const Model = dynamic(() => import("./ui/model"), { ssr: false });
+const Model = dynamic(() => import("../ui/model"), { ssr: false });
 
 export default function Avatar() {
   return (

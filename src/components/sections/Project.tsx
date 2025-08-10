@@ -4,88 +4,19 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useMemo } from "react";
 import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+import { ImageWithTheme, ProjectCard } from "@/components/theme";
+import { projects, projectCategories } from "@/data";
+import type { Project as ProjectType } from "@/types";
 
-const categories = ["All", "Website", "Mobile"];
+const categories = projectCategories.map(cat => cat.value);
 
-interface Project {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  github: string;
-  live: string;
-  category: string;
-}
-
-const projects = [
-  {
-    id: 1,
-    title: "Learning Management System",
-    description:
-      "A comprehensive web-based platform for creating, managing, and delivering online courses. Features real-time interactions, progress tracking, automated assessments, and advanced analytics dashboard for instructors and administrators.",
-    image: "/images/lms.png",
-    technologies: [
-      "TypeScript",
-      "Next.js",
-      "Tailwind CSS",
-      "Express.js",
-      "MongoDB",
-      "Socket.io",
-      "JWT"
-    ],
-    github: "https://github.com/Harley2003/Learning-Management-System",
-    live: "",
-    category: "Website"
-  },
-  {
-    id: 2,
-    title: "Employee Management System",
-    description:
-      "Enterprise-grade web application for streamlining HR operations. Features role-based access control, employee profile management, attendance tracking, and comprehensive reporting with data visualization.",
-    image: "/images/mes.png",
-    technologies: [
-      "JavaScript",
-      "React",
-      "Material UI",
-      "Express.js",
-      "MongoDB",
-      "Chart.js",
-      "PDF Export"
-    ],
-    github: "https://github.com/Harley2003/Manager-Employee",
-    live: "",
-    category: "Website"
-  },
-  {
-    id: 4,
-    title: "Quizzy Learning Platform",
-    description:
-      "Interactive learning platform with AI-powered quiz generation, spaced repetition algorithms, and collaborative study groups. Features real-time multiplayer quizzes and comprehensive learning analytics.",
-    image: "/images/qw.png",
-    technologies: [
-      "JavaScript",
-      "React",
-      "Ant Design",
-      "Express.js",
-      "MongoDB",
-      "WebRTC",
-      "OpenAI API"
-    ],
-    github: "https://github.com/Harley2003/Quizzy",
-    live: "",
-    category: "Website"
-  }
-];
-
-export default function Project() {
+export default function ProjectSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const filteredProjects: Project[] = useMemo(
+  const filteredProjects: ProjectType[] = useMemo(
     () =>
       selectedCategory === "All"
         ? projects
@@ -126,12 +57,19 @@ export default function Project() {
           </p>
         </motion.div>
 
-        {/* Nút lọc danh mục */}
-        <div className="flex justify-center gap-3 mb-12">
+        {/* Nút lọc danh mục - Responsive */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 px-4"
+        >
           {categories.map((cat) => (
             <Button
               key={cat}
               variant={selectedCategory === cat ? "default" : "outline"}
+              size="sm"
+              className="text-sm sm:text-base px-3 sm:px-4 py-2 sm:py-2.5 touch-target"
               onClick={() => {
                 setSelectedCategory(cat);
                 setCurrentIndex(0);
@@ -140,20 +78,19 @@ export default function Project() {
               {cat}
             </Button>
           ))}
-        </div>
+        </motion.div>
 
         {/* Desktop Grid View */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-8">
           {filteredProjects.map((project, index) => (
-            <motion.div
+            <ProjectCard
               key={project.id}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="group relative overflow-hidden rounded-xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300"
             >
               <div className="relative overflow-hidden">
-                <Image
+                <ImageWithTheme
                   src={project.image || "/images/placeholder.svg"}
                   alt={project.title}
                   width={600}
@@ -163,7 +100,7 @@ export default function Project() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <a
-                    href={project.github}
+                    href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -171,9 +108,9 @@ export default function Project() {
                       <Github className="h-4 w-4" />
                     </Button>
                   </a>
-                  {project.live && (
+                  {project.liveUrl && (
                     <a
-                      href={project.live}
+                      href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -201,60 +138,97 @@ export default function Project() {
                   ))}
                 </div>
               </div>
-            </motion.div>
+            </ProjectCard>
           ))}
         </div>
 
-        {/* Mobile Carousel View */}
+        {/* Mobile/Tablet Carousel View */}
         <div className="lg:hidden">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.6 }}
-            className="relative"
+            className="relative px-4"
           >
-            <div className="overflow-hidden rounded-xl">
+            {/* Carousel Container */}
+            <div className="overflow-hidden rounded-xl sm:rounded-2xl">
               <motion.div
                 className="flex"
                 animate={{ x: `-${currentIndex * 100}%` }}
-                transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 30,
+                  duration: 0.6
+                }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.1}
+                onDragEnd={(_, info) => {
+                  const threshold = 50;
+                  if (info.offset.x > threshold && currentIndex > 0) {
+                    prevProject();
+                  } else if (info.offset.x < -threshold && currentIndex < filteredProjects.length - 1) {
+                    nextProject();
+                  }
+                }}
               >
                 {filteredProjects.map((project) => (
-                  <div key={project.id} className="w-full flex-shrink-0">
-                    <div className="bg-card border border-border/50 rounded-xl overflow-hidden">
-                      <Image
-                        src={project.image || "/placeholder.svg"}
-                        alt={project.title}
-                        width={600}
-                        height={400}
-                        className="w-full h-64 object-cover"
-                      />
-                      <div className="p-6">
-                        <h3 className="text-xl font-semibold mb-2">
+                  <div key={project.id} className="w-full flex-shrink-0 px-2">
+                    <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl sm:rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="relative">
+                        <ImageWithTheme
+                          src={project.image || "/images/placeholder.svg"}
+                          alt={project.title}
+                          width={600}
+                          height={400}
+                          className="w-full h-48 sm:h-56 md:h-64 object-cover"
+                        />
+                        {/* Gradient overlay for better text readability */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                      </div>
+                      
+                      <div className="p-4 sm:p-6">
+                        <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
                           {project.title}
                         </h3>
-                        <p className="text-muted-foreground mb-4">
+                        <p className="text-muted-foreground text-sm sm:text-base mb-4 line-clamp-3">
                           {project.description}
                         </p>
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        
+                        {/* Technologies - Horizontal scroll on mobile */}
+                        <div className="flex gap-2 mb-4 sm:mb-6 overflow-x-auto pb-2 scrollbar-hide">
                           {project.technologies.map((tech) => (
                             <span
                               key={tech}
-                              className="px-3 py-1 text-xs font-medium bg-primary/10 text-primary rounded-full"
+                              className="flex-shrink-0 px-2 sm:px-3 py-1 text-xs sm:text-sm font-medium bg-primary/10 text-primary rounded-full"
                             >
                               {tech}
                             </span>
                           ))}
                         </div>
-                        <div className="flex gap-2">
-                          <Button size="sm" variant="outline">
-                            <Github className="h-4 w-4 mr-2" />
+                        
+                        {/* Action buttons */}
+                        <div className="flex gap-2 sm:gap-3">
+                          <Button 
+                            size="sm" 
+                            variant="outline"
+                            className="flex-1 text-xs sm:text-sm h-9 sm:h-10"
+                            onClick={() => window.open(project.githubUrl, '_blank')}
+                          >
+                            <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                             Code
                           </Button>
-                          <Button size="sm">
-                            <ExternalLink className="h-4 w-4 mr-2" />
-                            Live Demo
-                          </Button>
+                          {project.liveUrl && (
+                            <Button 
+                              size="sm"
+                              className="flex-1 text-xs sm:text-sm h-9 sm:h-10"
+                              onClick={() => window.open(project.liveUrl, '_blank')}
+                            >
+                              <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                              Demo
+                            </Button>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -263,38 +237,54 @@ export default function Project() {
               </motion.div>
             </div>
 
-            {/* Nút điều hướng */}
+            {/* Navigation Arrows - Hidden on mobile, visible on tablet */}
             <Button
               variant="outline"
               size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-transparent"
+              className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background/90 w-8 h-8 sm:w-10 sm:h-10 hidden sm:flex"
               onClick={prevProject}
+              disabled={currentIndex === 0}
             >
               <ChevronLeft className="h-4 w-4" />
             </Button>
             <Button
               variant="outline"
               size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-transparent"
+              className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 bg-background/80 backdrop-blur-sm border-border/50 hover:bg-background/90 w-8 h-8 sm:w-10 sm:h-10 hidden sm:flex"
               onClick={nextProject}
+              disabled={currentIndex === filteredProjects.length - 1}
             >
               <ChevronRight className="h-4 w-4" />
             </Button>
 
-            {/* Indicator */}
-            <div className="flex justify-center gap-2 mt-6">
+            {/* Dot Indicators */}
+            <div className="flex justify-center gap-2 mt-4 sm:mt-6">
               {filteredProjects.map((_, index) => (
-                <button
-                  key={index}
-                  className={`w-2 h-2 rounded-full transition-colors ${
+                <motion.button
+                  key={`indicator-${index}`}
+                  className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 touch-target ${
                     index === currentIndex
-                      ? "bg-primary"
-                      : "bg-muted-foreground/30"
+                      ? "bg-primary shadow-lg"
+                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
                   }`}
                   onClick={() => setCurrentIndex(index)}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
                 />
               ))}
             </div>
+            
+            {/* Swipe hint for mobile */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.5 }}
+              className="flex sm:hidden justify-center mt-4"
+            >
+              <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
+                <span>👈 Swipe to navigate 👉</span>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

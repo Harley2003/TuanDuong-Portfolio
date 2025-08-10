@@ -2,7 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import SkillCanvas from "./SkillCanvas";
+import { SkillCanvas } from "@/components/animations";
 
 export default function Skill() {
   const ref = useRef(null);
@@ -34,10 +34,10 @@ export default function Skill() {
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Specialized in full-stack development with expertise in modern web technologies 
-            and blockchain solutions. Proficient in building scalable applications using React, 
-            Node.js, TypeScript, and smart contract development with Solidity. 
+            and software engineering. Proficient in building scalable applications using React, 
+            Node.js, TypeScript, and modern backend frameworks. 
             Passionate about creating secure, efficient, and innovative digital experiences 
-            that bridge traditional web development with decentralized technologies.
+            with clean, maintainable code and exceptional user interfaces.
           </p>
         </motion.div>
 

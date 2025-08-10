@@ -4,8 +4,7 @@ import {
   FaJava,
   FaLightbulb,
   FaPhp,
-  FaUsers,
-  FaEthereum
+  FaUsers
 } from "react-icons/fa";
 import { FaGolang } from "react-icons/fa6";
 import { GrMysql } from "react-icons/gr";
@@ -32,9 +31,7 @@ import {
   SiCypress,
   SiPostman,
   SiNestjs,
-  SiPostgresql,
-  SiSolidity,
-  SiWeb3Dotjs
+  SiPostgresql
 } from "react-icons/si";
 
 export const skillCategories = [
@@ -61,14 +58,6 @@ export const skillCategories = [
       { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
       { name: "Express.js", icon: SiExpress, color: "#000000" },
       { name: "NestJS", icon: SiNestjs, color: "#E0234E" }
-    ]
-  },
-  {
-    title: "Blockchain",
-    skills: [
-      { name: "Solidity", icon: SiSolidity, color: "#363636" },
-      { name: "Web3.js", icon: SiWeb3Dotjs, color: "#F16822" },
-      { name: "Ethereum", icon: FaEthereum, color: "#627EEA" }
     ]
   },
   {

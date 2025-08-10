@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin } from "lucide-react";
-import Logo from "./Logo"; // Import Logo component
+import { Logo } from "@/components/common"; // Import Logo component
 
 export default function Footer() {
   return (
@@ -21,7 +21,7 @@ export default function Footer() {
           <p className="text-sm ml-2">
             {" "}
             {/* Added ml-2 for spacing */}
-            &copy; {new Date().getFullYear()} Tuan Duong - Full Stack Developer. All rights reserved.
+            &copy; {new Date().getFullYear()} Harley - Full Stack Developer. All rights reserved.
           </p>
         </div>
 

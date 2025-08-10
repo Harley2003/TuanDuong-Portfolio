@@ -5,41 +5,10 @@ import { useRef } from "react";
 import {
   Calendar,
   MapPin,
-  Code,
   Briefcase,
   PersonStanding,
-  University
 } from "lucide-react";
-
-const experiences = [
-  {
-    id: 1,
-    year: "09/2021 – 01/2026",
-    title: "Software Engineering Student",
-    company: "FPT University, Ha Noi",
-    description: [
-      "Major: Software Engineering with focus on Full Stack Development",
-      "GPA: 3.2/4.0 - Strong academic performance in core CS subjects",
-      "Active member of FU Debate Club - Enhanced communication and analytical skills",
-      "Completed advanced courses in Data Structures, Algorithms, and Database Design"
-    ],
-    icon: University
-  },
-  {
-    id: 2,
-    year: "7/2024 - 12/2024",
-    title: "Frontend Developer Intern",
-    company: "JVB VIET NAM JOINT STOCK COMPANY",
-    description: [
-      "Developed responsive web applications using React, JavaScript (ES6+), and modern CSS frameworks",
-      "Built and deployed multiple projects including calendar app, weather dashboard, and e-commerce components",
-      "Collaborated with cross-functional teams in agile environment for requirement analysis and project delivery",
-      "Integrated RESTful APIs and implemented state management solutions using Redux and Context API",
-      "Achieved 95% code review approval rate and delivered all assigned tasks ahead of deadlines"
-    ],
-    icon: Code
-  }
-];
+import { experiences, personalInfo } from "@/data";
 
 export default function About() {
   const ref = useRef(null);
@@ -58,10 +27,10 @@ export default function About() {
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Dedicated Full Stack Developer with expertise in modern web technologies and blockchain development. 
-            I specialize in building scalable, secure applications using React, Node.js, TypeScript, and Web3 technologies. 
+            Dedicated Full Stack Developer with expertise in modern web technologies and software engineering. 
+            I specialize in building scalable, secure applications using React, Node.js, TypeScript, and modern frameworks. 
             With a strong foundation in software engineering principles and hands-on experience in both frontend and backend development, 
-            I&apos;m passionate about creating innovative solutions that bridge traditional web development with emerging blockchain technologies.
+            I&apos;m passionate about creating innovative solutions that deliver exceptional user experiences and drive business value.
           </p>
         </motion.div>
 
@@ -74,15 +43,15 @@ export default function About() {
             <div className="space-y-6">
               <div className="flex items-center gap-3 text-muted-foreground">
                 <PersonStanding className="h-5 w-5" />
-                <span>Male</span>
+                <span>{personalInfo.gender}</span>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Calendar className="h-5 w-5" />
-                <span>05/07/2003</span>
+                <span>{personalInfo.birthDate}</span>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <MapPin className="h-5 w-5" />
-                <span>Ha Noi</span>
+                <span>{personalInfo.location}</span>
               </div>
               <div className="flex items-center gap-3 text-muted-foreground">
                 <Briefcase className="h-5 w-5" />
@@ -90,15 +59,11 @@ export default function About() {
               </div>
 
               <li className="text-lg leading-relaxed">
-                Secure a position as a Full Stack Developer where I can apply my expertise 
-                in modern web technologies and blockchain development to create innovative, 
-                scalable solutions that drive business growth and user engagement.
+                {personalInfo.careerObjectives[0]}
               </li>
 
               <li className="text-lg leading-relaxed">
-                Evolve into a senior technical role, leading development teams in building 
-                next-generation web applications and blockchain solutions, while contributing 
-                to open-source projects and staying at the forefront of emerging technologies.
+                {personalInfo.careerObjectives[1]}
               </li>
             </div>
           </motion.div>

@@ -4,7 +4,7 @@ import React, { Suspense, useMemo } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Preload, Environment } from "@react-three/drei";
 import SkillIcon3D from "./SkillIcon3D";
-import { allSkills } from "../data/skill";
+import { allSkills } from "../../data/skill";
 
 const calculatePositions = (count: number, radius: number) => {
   const positions: [number, number, number][] = [];
