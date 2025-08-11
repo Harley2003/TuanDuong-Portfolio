@@ -12,7 +12,7 @@ export const projects: Project[] = [
     title: "Learning Management System",
     description: "A comprehensive web-based platform for creating, managing, and delivering online courses.",
     longDescription: "A comprehensive web-based platform for creating, managing, and delivering online courses. Features real-time interactions, progress tracking, automated assessments, and advanced analytics dashboard for instructors and administrators.",
-    image: "/images/lms.png",
+    image: "/projects/lms.png",
     technologies: [
       "TypeScript",
       "Next.js",
@@ -33,7 +33,7 @@ export const projects: Project[] = [
     title: "Employee Management System",
     description: "Enterprise-grade web application for streamlining HR operations.",
     longDescription: "Enterprise-grade web application for streamlining HR operations. Features role-based access control, employee profile management, attendance tracking, and comprehensive reporting with data visualization.",
-    image: "/images/mes.png",
+    image: "/projects/mes.png",
     technologies: [
       "JavaScript",
       "React",
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     title: "Quizzy Learning Platform",
     description: "Interactive learning platform with AI-powered quiz generation.",
     longDescription: "Interactive learning platform with AI-powered quiz generation, spaced repetition algorithms, and collaborative study groups. Features real-time multiplayer quizzes and comprehensive learning analytics.",
-    image: "/images/qw.png",
+    image: "/projects/qw.png",
     technologies: [
       "JavaScript",
       "React",

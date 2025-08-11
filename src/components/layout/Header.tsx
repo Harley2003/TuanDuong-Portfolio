@@ -27,10 +27,10 @@ export default function Navigation() {
 
   const handleTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     const distance = touchStart - touchEnd;
     const isRightSwipe = distance < -50; // Swipe right threshold
-    
+
     if (isRightSwipe && isOpen) {
       setIsOpen(false);
     }
@@ -39,10 +39,10 @@ export default function Navigation() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      
+
       // Update active section based on scroll position
-      const sections = navItems.map(item => item.href.substring(1));
-      const currentSection = sections.find(section => {
+      const sections = navItems.map((item) => item.href.substring(1));
+      const currentSection = sections.find((section) => {
         const element = document.getElementById(section);
         if (element) {
           const rect = element.getBoundingClientRect();
@@ -50,7 +50,7 @@ export default function Navigation() {
         }
         return false;
       });
-      
+
       if (currentSection) {
         setActiveSection(currentSection);
       }
@@ -64,7 +64,7 @@ export default function Navigation() {
 
     window.addEventListener("scroll", handleScroll);
     window.addEventListener("resize", handleResize);
-    
+
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
@@ -95,7 +95,7 @@ export default function Navigation() {
         }`}
         style={{
           backdropFilter: scrolled ? "blur(20px) saturate(180%)" : "none",
-          WebkitBackdropFilter: scrolled ? "blur(20px) saturate(180%)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(20px) saturate(180%)" : "none"
         }}
       >
         <div className="container-responsive">
@@ -135,7 +135,11 @@ export default function Navigation() {
                     <motion.div
                       layoutId="activeSection"
                       className="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20 shadow-sm"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 380,
+                        damping: 30
+                      }}
                     />
                   )}
                 </motion.button>
@@ -203,14 +207,14 @@ export default function Navigation() {
                 className="fixed inset-0 bg-background/80 backdrop-blur-md z-40 md:hidden"
                 onClick={() => setIsOpen(false)}
               />
-              
+
               {/* Full-screen Mobile Menu */}
               <motion.div
                 initial={{ x: "100%", opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: "100%", opacity: 0 }}
-                transition={{ 
-                  duration: 0.4, 
+                transition={{
+                  duration: 0.4,
                   ease: [0.23, 1, 0.32, 1],
                   opacity: { duration: 0.3 }
                 }}
@@ -240,7 +244,7 @@ export default function Navigation() {
                           key={item.name}
                           initial={{ opacity: 0, x: 50 }}
                           animate={{ opacity: 1, x: 0 }}
-                          transition={{ 
+                          transition={{
                             delay: 0.1 + index * 0.05,
                             duration: 0.4,
                             ease: [0.23, 1, 0.32, 1]
@@ -253,16 +257,20 @@ export default function Navigation() {
                           }`}
                         >
                           <span>{item.name}</span>
-                          
+
                           {/* Active indicator */}
                           {activeSection === item.href.substring(1) && (
                             <motion.div
                               layoutId="mobileActiveSection"
                               className="w-2 h-2 bg-primary rounded-full"
-                              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                              transition={{
+                                type: "spring",
+                                stiffness: 380,
+                                damping: 30
+                              }}
                             />
                           )}
-                          
+
                           {/* Hover effect */}
                           <motion.div
                             className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"

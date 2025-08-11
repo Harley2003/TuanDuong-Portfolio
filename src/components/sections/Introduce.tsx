@@ -59,7 +59,7 @@ export default function Introduce() {
               <div className="relative">
                 {/* <Avatar /> */}
                 <Image
-                  src="/images/avatar.png"
+                  src="/images/Avatar.png"
                   alt="Avatar"
                   width={800}
                   height={800}

@@ -8,7 +8,7 @@ import { ImageWithTheme, ProjectCard } from "@/components/theme";
 import { projects, projectCategories } from "@/data";
 import type { Project as ProjectType } from "@/types";
 
-const categories = projectCategories.map(cat => cat.value);
+const categories = projectCategories.map((cat) => cat.value);
 
 export default function ProjectSection() {
   const ref = useRef(null);
@@ -91,7 +91,7 @@ export default function ProjectSection() {
             >
               <div className="relative overflow-hidden">
                 <ImageWithTheme
-                  src={project.image || "/images/placeholder.svg"}
+                  src={project.image || "/projects/placeholder.svg"}
                   alt={project.title}
                   width={600}
                   height={400}
@@ -155,9 +155,9 @@ export default function ProjectSection() {
               <motion.div
                 className="flex"
                 animate={{ x: `-${currentIndex * 100}%` }}
-                transition={{ 
-                  type: "spring", 
-                  stiffness: 300, 
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
                   damping: 30,
                   duration: 0.6
                 }}
@@ -168,7 +168,10 @@ export default function ProjectSection() {
                   const threshold = 50;
                   if (info.offset.x > threshold && currentIndex > 0) {
                     prevProject();
-                  } else if (info.offset.x < -threshold && currentIndex < filteredProjects.length - 1) {
+                  } else if (
+                    info.offset.x < -threshold &&
+                    currentIndex < filteredProjects.length - 1
+                  ) {
                     nextProject();
                   }
                 }}
@@ -187,7 +190,7 @@ export default function ProjectSection() {
                         {/* Gradient overlay for better text readability */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                       </div>
-                      
+
                       <div className="p-4 sm:p-6">
                         <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
                           {project.title}
@@ -195,7 +198,7 @@ export default function ProjectSection() {
                         <p className="text-muted-foreground text-sm sm:text-base mb-4 line-clamp-3">
                           {project.description}
                         </p>
-                        
+
                         {/* Technologies - Horizontal scroll on mobile */}
                         <div className="flex gap-2 mb-4 sm:mb-6 overflow-x-auto pb-2 scrollbar-hide">
                           {project.technologies.map((tech) => (
@@ -207,23 +210,27 @@ export default function ProjectSection() {
                             </span>
                           ))}
                         </div>
-                        
+
                         {/* Action buttons */}
                         <div className="flex gap-2 sm:gap-3">
-                          <Button 
-                            size="sm" 
+                          <Button
+                            size="sm"
                             variant="outline"
                             className="flex-1 text-xs sm:text-sm h-9 sm:h-10"
-                            onClick={() => window.open(project.githubUrl, '_blank')}
+                            onClick={() =>
+                              window.open(project.githubUrl, "_blank")
+                            }
                           >
                             <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                             Code
                           </Button>
                           {project.liveUrl && (
-                            <Button 
+                            <Button
                               size="sm"
                               className="flex-1 text-xs sm:text-sm h-9 sm:h-10"
-                              onClick={() => window.open(project.liveUrl, '_blank')}
+                              onClick={() =>
+                                window.open(project.liveUrl, "_blank")
+                              }
                             >
                               <ExternalLink className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                               Demo
@@ -257,34 +264,20 @@ export default function ProjectSection() {
               <ChevronRight className="h-4 w-4" />
             </Button>
 
-            {/* Dot Indicators */}
-            <div className="flex justify-center gap-2 mt-4 sm:mt-6">
+            {/* Dots */}
+            <div className="flex justify-center gap-2 mt-4">
               {filteredProjects.map((_, index) => (
-                <motion.button
-                  key={`indicator-${index}`}
-                  className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 touch-target ${
-                    index === currentIndex
-                      ? "bg-primary shadow-lg"
-                      : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
+                <button
+                  key={index}
                   onClick={() => setCurrentIndex(index)}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    index === currentIndex
+                      ? "bg-primary"
+                      : "bg-muted-foreground/30"
+                  }`}
                 />
               ))}
             </div>
-            
-            {/* Swipe hint for mobile */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.5 }}
-              className="flex sm:hidden justify-center mt-4"
-            >
-              <div className="flex items-center gap-2 text-xs text-muted-foreground bg-muted/50 px-3 py-1.5 rounded-full">
-                <span>👈 Swipe to navigate 👉</span>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
       </div>
