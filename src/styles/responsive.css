@@ -1,11 +1,28 @@
 /* Responsive Design Utilities */
 
+/* Prevent horizontal scroll on all devices */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Utility to prevent any element from causing horizontal overflow */
+.no-overflow {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 /* Responsive container */
 .container-responsive {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  overflow-x: hidden;
 }
 
 @media (min-width: 640px) {
@@ -226,6 +243,41 @@
 
 .safe-area-bottom {
   padding-bottom: max(1rem, env(safe-area-inset-bottom));
+}
+
+/* Mobile menu specific styles */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 60;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  max-width: 85vw;
+  background: hsl(var(--background) / 0.98);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-left: 1px solid hsl(var(--border) / 0.3);
+  z-index: 70;
+  overflow: hidden;
+}
+
+/* Prevent body scroll when mobile menu is open */
+.mobile-menu-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
 }
 
 /* Grid responsive */

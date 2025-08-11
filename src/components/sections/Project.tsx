@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useMemo } from "react";
-import { ExternalLink, Github, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useState, useMemo, useEffect } from "react";
+import { ExternalLink, GitBranch, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ImageWithTheme, ProjectCard } from "@/components/theme";
 import { projects, projectCategories } from "@/data";
@@ -15,6 +15,7 @@ export default function ProjectSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [isPaused, setIsPaused] = useState(false);
 
   const filteredProjects: ProjectType[] = useMemo(
     () =>
@@ -23,6 +24,21 @@ export default function ProjectSection() {
         : projects.filter((p) => p.category === selectedCategory),
     [selectedCategory]
   );
+
+  // Auto-play logic
+  useEffect(() => {
+    if (isPaused || filteredProjects.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
+    }, 5000); // Change slide every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isPaused, filteredProjects.length]);
+
+  // Pause auto-play when user hovers over the slider
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
 
   const nextProject = () => {
     setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
@@ -105,7 +121,7 @@ export default function ProjectSection() {
                     rel="noopener noreferrer"
                   >
                     <Button size="sm" variant="secondary">
-                      <Github className="h-4 w-4" />
+                      <GitBranch className="h-4 w-4" />
                     </Button>
                   </a>
                   {project.liveUrl && (
@@ -149,6 +165,8 @@ export default function ProjectSection() {
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.6 }}
             className="relative px-4"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             {/* Carousel Container */}
             <div className="overflow-hidden rounded-xl sm:rounded-2xl">
@@ -221,7 +239,7 @@ export default function ProjectSection() {
                               window.open(project.githubUrl, "_blank")
                             }
                           >
-                            <Github className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                            <GitBranch className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                             Code
                           </Button>
                           {project.liveUrl && (
@@ -266,9 +284,9 @@ export default function ProjectSection() {
 
             {/* Dots */}
             <div className="flex justify-center gap-2 mt-4">
-              {filteredProjects.map((_, index) => (
+              {filteredProjects.map((project, index) => (
                 <button
-                  key={index}
+                  key={project.id}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-2.5 h-2.5 rounded-full transition-all ${
                     index === currentIndex

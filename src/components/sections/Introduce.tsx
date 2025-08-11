@@ -16,7 +16,7 @@ export default function Introduce() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden safe-area-top"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden safe-area-top no-overflow"
     >
       {/* Enhanced Background */}
       <AnimatedBackground />
@@ -49,7 +49,7 @@ export default function Introduce() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[calc(100vh-8rem)]">
           {/* Avatar Section */}
           <motion.div
-            className="order-2 lg:order-1 flex justify-center"
+            className="order-1 lg:order-1 flex justify-center"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1, delay: 0.2, type: "spring" }}
@@ -71,7 +71,7 @@ export default function Introduce() {
 
           {/* Content Section */}
           <motion.div
-            className="order-1 lg:order-2 text-center lg:text-left space-y-6 sm:space-y-8"
+            className="order-2 lg:order-2 text-center lg:text-left space-y-6 sm:space-y-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -90,9 +90,9 @@ export default function Introduce() {
                 <span className="block bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent">
                   <TypeAnimation
                     sequence={[
-                      "Hareley", 
-                      2000, 
-                      "a Full Stack Developer", 
+                      "Hareley",
+                      2000,
+                      "a Full Stack Developer",
                       2000,
                       "a Software Engineer",
                       2000,
@@ -115,10 +115,11 @@ export default function Introduce() {
               </h1>
 
               <p className="text-responsive-base sm:text-responsive-lg text-muted-foreground max-w-2xl leading-relaxed mx-auto lg:mx-0">
-                Passionate Full Stack Developer specializing in modern web technologies 
-                and scalable applications. I craft efficient, secure solutions using 
-                React, Node.js, TypeScript, and cutting-edge frameworks. 
-                Committed to delivering exceptional user experiences and innovative digital solutions.
+                Passionate Full Stack Developer specializing in modern web
+                technologies and scalable applications. I craft efficient,
+                secure solutions using React, Node.js, TypeScript, and
+                cutting-edge frameworks. Committed to delivering exceptional
+                user experiences and innovative digital solutions.
               </p>
             </motion.div>
 
@@ -147,9 +148,9 @@ export default function Introduce() {
                 className="w-full sm:w-auto group glass hover:glass-strong border-primary/20 hover:border-primary/40 transition-all duration-300 focus-ring btn-responsive touch-target"
                 onClick={() => {
                   // Create a link to download CV (you need to add your CV file to public folder)
-                  const link = document.createElement('a');
-                  link.href = '/cv/Tuan-Duong-CV.pdf'; // Add your CV file to public/cv/ folder
-                  link.download = 'Tuan-Duong-Full-Stack-Developer-CV.pdf';
+                  const link = document.createElement("a");
+                  link.href = "/cv/Fullstack Developer.pdf"; // Add your CV file to public/cv/ folder
+                  link.download = "Fullstack Developer.pdf";
                   link.click();
                 }}
               >

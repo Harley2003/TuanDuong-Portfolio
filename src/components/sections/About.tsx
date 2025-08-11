@@ -2,12 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import {
-  Calendar,
-  MapPin,
-  Briefcase,
-  PersonStanding,
-} from "lucide-react";
+import { Calendar, MapPin, Briefcase, PersonStanding } from "lucide-react";
 import { experiences, personalInfo } from "@/data";
 
 export default function About() {
@@ -27,10 +22,8 @@ export default function About() {
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Dedicated Full Stack Developer with expertise in modern web technologies and software engineering. 
-            I specialize in building scalable, secure applications using React, Node.js, TypeScript, and modern frameworks. 
-            With a strong foundation in software engineering principles and hands-on experience in both frontend and backend development, 
-            I&apos;m passionate about creating innovative solutions that deliver exceptional user experiences and drive business value.
+            Dedicated Full Stack Developer with expertise in modern web
+            technologies and software engineering.
           </p>
         </motion.div>
 

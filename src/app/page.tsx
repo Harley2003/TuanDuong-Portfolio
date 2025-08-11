@@ -18,7 +18,7 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <main className="relative">
+    <main className="relative no-overflow">
       <AnimatePresence>
         {isLoading ? (
           <SplashScreen onFinish={() => setIsLoading(false)} />

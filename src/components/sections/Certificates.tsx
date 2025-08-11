@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
@@ -12,6 +12,22 @@ export default function Certificates() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Auto-play logic
+  useEffect(() => {
+    if (isPaused) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % certificates.length);
+    }, 4000); // Change slide every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  // Pause auto-play when user hovers over the slider
+  const handleMouseEnter = () => setIsPaused(true);
+  const handleMouseLeave = () => setIsPaused(false);
 
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % certificates.length);
@@ -89,6 +105,8 @@ export default function Certificates() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
             className="relative px-4"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <div className="overflow-hidden rounded-xl">
               <motion.div
@@ -158,9 +176,9 @@ export default function Certificates() {
 
             {/* Dots */}
             <div className="flex justify-center gap-2 mt-4">
-              {certificates.map((_, index) => (
+              {certificates.map((cert, index) => (
                 <button
-                  key={index}
+                  key={cert.id}
                   onClick={() => setCurrentIndex(index)}
                   className={`w-2.5 h-2.5 rounded-full transition-all ${
                     index === currentIndex

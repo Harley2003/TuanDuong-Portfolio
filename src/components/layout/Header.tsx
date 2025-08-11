@@ -71,6 +71,33 @@ export default function Navigation() {
     };
   }, [isOpen]);
 
+  // Handle body scroll lock when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.body.style.width = "100%";
+      document.body.style.top = `-${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+      if (scrollY) {
+        const scrollPosition = parseInt(scrollY.replace("px", "")) * -1;
+        window.scrollTo(0, scrollPosition);
+      }
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.position = "";
+      document.body.style.width = "";
+      document.body.style.top = "";
+    };
+  }, [isOpen]);
+
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
 
@@ -88,7 +115,7 @@ export default function Navigation() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 safe-area-top ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? "bg-background/95 backdrop-blur-xl border-b border-border/50 shadow-lg"
             : "bg-transparent"
@@ -156,7 +183,7 @@ export default function Navigation() {
                 variant="ghost"
                 size="sm"
                 onClick={() => setIsOpen(!isOpen)}
-                className="focus-ring touch-target p-2 relative z-50"
+                className="focus-ring touch-target p-2 relative z-[80]"
                 aria-label={isOpen ? "Close menu" : "Open menu"}
               >
                 <motion.div
@@ -204,7 +231,7 @@ export default function Navigation() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                className="fixed inset-0 bg-background/80 backdrop-blur-md z-40 md:hidden"
+                className="mobile-menu-overlay md:hidden"
                 onClick={() => setIsOpen(false)}
               />
 
@@ -218,14 +245,14 @@ export default function Navigation() {
                   ease: [0.23, 1, 0.32, 1],
                   opacity: { duration: 0.3 }
                 }}
-                className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-background/95 backdrop-blur-xl border-l border-border/30 shadow-2xl z-50 md:hidden safe-area-top safe-area-bottom"
+                className="mobile-menu md:hidden"
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
               >
-                <div className="flex flex-col h-full">
+                <div className="flex flex-col h-full pt-4 pb-4 bg-background">
                   {/* Header with close button */}
-                  <div className="flex items-center justify-between p-6 border-b border-border/20">
+                  <div className="flex items-center justify-between px-6 py-4 border-b border-border/20">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8">
                         <Logo />
@@ -280,21 +307,6 @@ export default function Navigation() {
                       ))}
                     </div>
                   </div>
-
-                  {/* Footer with theme info */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.4 }}
-                    className="p-6 border-t border-border/20"
-                  >
-                    <div className="text-center text-sm text-muted-foreground">
-                      <p>Swipe right to close</p>
-                      <div className="mt-2 flex items-center justify-center gap-2">
-                        <div className="w-8 h-1 bg-muted rounded-full"></div>
-                      </div>
-                    </div>
-                  </motion.div>
                 </div>
               </motion.div>
             </>

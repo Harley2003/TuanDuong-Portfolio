@@ -12,8 +12,7 @@ import {
   Brain,
   Target,
   Zap,
-  Shield,
-  Star
+  Shield
 } from "lucide-react";
 
 const roadmapData = [
@@ -175,345 +174,466 @@ const TimelineItem = ({
         isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: isLeft ? -100 : 100 }
       }
       transition={{ duration: 0.8, delay: index * 0.2 }}
-      className={`flex items-center mb-16 ${
-        isLeft ? "flex-row" : "flex-row-reverse"
-      }`}
+      className="relative mb-12 md:mb-16"
     >
-      {/* Content Card */}
-      <div className={`w-5/12 ${isLeft ? "pr-8" : "pl-8"}`}>
-        <motion.div
-          style={{
-            y: cardY,
-            rotate: cardRotate
-          }}
-          animate={{
-            scale: isActive ? 1.05 : 1,
-            boxShadow: isActive
-              ? "0 20px 40px rgba(var(--primary), 0.3), 0 0 0 2px rgba(var(--primary), 0.2)"
-              : "0 4px 16px rgba(0, 0, 0, 0.1)"
-          }}
-          whileHover={{
-            scale: 1.08,
-            y: -10,
-            rotateY: isLeft ? 5 : -5,
-            transition: { duration: 0.3 }
-          }}
-          className={`relative p-6 rounded-2xl backdrop-blur-sm border transition-all duration-500 group ${
-            isActive
-              ? "bg-card border-primary/50 shadow-2xl"
-              : "bg-card/80 border-border/50 shadow-lg hover:shadow-2xl"
-          }`}
-        >
-          {/* Active Glow Effect */}
-          {isActive && (
-            <motion.div
-              className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${item.color} opacity-10`}
-              animate={{
-                opacity: [0.1, 0.2, 0.1]
-              }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          )}
-
-          {/* Floating particles - more active when highlighted */}
-          <div className="absolute inset-0 overflow-hidden rounded-2xl">
-            {Array.from({ length: isActive ? 5 : 3 }, (_, i) => (
-              <motion.div
-                key={`particle-${item.id}-${i}-${20 + i * 20}-${30 + i * 15}`}
-                className={`absolute w-1 h-1 rounded-full ${
-                  isActive ? "bg-primary/50" : "bg-primary/30"
-                }`}
-                animate={{
-                  x: [0, 100, 0],
-                  y: [0, -50, 0],
-                  opacity: [0, 1, 0],
-                  scale: isActive ? [1, 1.5, 1] : [1, 1.2, 1]
-                }}
-                transition={{
-                  duration: isActive ? 2 + i : 3 + i,
-                  repeat: Infinity,
-                  delay: i * 0.5,
-                  ease: "easeInOut"
-                }}
-                style={{
-                  left: `${20 + i * 20}%`,
-                  top: `${30 + i * 15}%`
-                }}
-              />
-            ))}
-          </div>
-
-          <div className="relative z-10">
-            {/* Header */}
-            <div className="flex items-center gap-3 mb-4">
-              <motion.div
-                className={`p-3 rounded-xl bg-gradient-to-r ${item.color} shadow-lg`}
-                animate={{
-                  scale: isActive ? [1, 1.1, 1] : 1,
-                  rotate: isActive ? [0, 5, -5, 0] : 0
-                }}
-                transition={{
-                  duration: isActive ? 2 : 0.5,
-                  repeat: isActive ? Infinity : 0
-                }}
-                whileHover={{
-                  rotate: 360,
-                  scale: 1.15
-                }}
-              >
-                <item.icon className="h-6 w-6 text-white" />
-              </motion.div>
-              <div>
-                <motion.h3
-                  className={`text-xl font-bold transition-colors duration-300 ${
-                    isActive ? "text-primary" : "text-foreground"
-                  }`}
-                  animate={{
-                    scale: isActive ? [1, 1.02, 1] : 1
-                  }}
-                  transition={{ duration: 2, repeat: isActive ? Infinity : 0 }}
-                >
-                  {item.phase}
-                </motion.h3>
-                <motion.p
-                  className={`text-sm font-medium transition-colors duration-300 ${
-                    isActive ? "text-primary/80" : "text-muted-foreground"
-                  }`}
-                  initial={{ opacity: 0 }}
-                  animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-                  transition={{ delay: index * 0.2 + 0.3 }}
-                >
-                  {item.timeframe}
-                </motion.p>
-              </div>
-            </div>
-
-            {/* Skills Section */}
-            <div className="mb-4">
-              <motion.h4
-                className={`text-sm font-semibold mb-2 flex items-center gap-2 transition-colors duration-300 ${
-                  isActive ? "text-primary" : "text-primary/70"
-                }`}
-                whileHover={{ x: 5 }}
-              >
-                <motion.div
-                  animate={{
-                    rotate: isActive ? [0, 360] : 0,
-                    scale: isActive ? [1, 1.2, 1] : 1
-                  }}
-                  transition={{
-                    duration: isActive ? 1.5 : 2,
-                    repeat: isActive ? Infinity : 0,
-                    ease: "linear"
-                  }}
-                >
-                  <Zap className="h-4 w-4" />
-                </motion.div>
-                Core Skills
-              </motion.h4>
-              <div className="space-y-1">
-                {item.skills.map((skill, skillIndex) => (
-                  <motion.div
-                    key={skill}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={
-                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
-                    }
-                    transition={{
-                      duration: 0.5,
-                      delay: index * 0.2 + skillIndex * 0.1
-                    }}
-                    whileHover={{ x: 10, scale: 1.02 }}
-                    className="text-sm text-muted-foreground flex items-center gap-2 cursor-pointer"
-                  >
-                    <motion.div
-                      className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
-                        isActive ? "bg-primary" : "bg-primary/60"
-                      }`}
-                      animate={{
-                        scale: isActive ? [1, 1.5, 1] : 1
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: isActive ? Infinity : 0,
-                        delay: skillIndex * 0.1
-                      }}
-                      whileHover={{ scale: 2 }}
-                    />
-                    <span className={isActive ? "text-foreground" : ""}>
-                      {skill}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Goals Section */}
-            <div>
-              <motion.h4
-                className={`text-sm font-semibold mb-2 flex items-center gap-2 transition-colors duration-300 ${
-                  isActive ? "text-primary" : "text-primary/70"
-                }`}
-                whileHover={{ x: 5 }}
-              >
-                <motion.div
-                  animate={{
-                    scale: isActive ? [1, 1.3, 1] : [1, 1.2, 1],
-                    rotate: isActive ? [0, 15, -15, 0] : [0, 10, -10, 0]
-                  }}
-                  transition={{
-                    duration: isActive ? 1.5 : 2,
-                    repeat: Infinity
-                  }}
-                >
-                  <Trophy className="h-4 w-4" />
-                </motion.div>
-                Key Goals
-              </motion.h4>
-              <div className="space-y-1">
-                {item.goals.map((goal, goalIndex) => (
-                  <motion.div
-                    key={goal}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={
-                      isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
-                    }
-                    transition={{
-                      duration: 0.5,
-                      delay: index * 0.2 + goalIndex * 0.1 + 0.3
-                    }}
-                    whileHover={{ x: 10, scale: 1.02 }}
-                    className="text-sm text-muted-foreground flex items-center gap-2 cursor-pointer"
-                  >
-                    <motion.div
-                      className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
-                        isActive ? "bg-secondary" : "bg-secondary/60"
-                      }`}
-                      animate={{
-                        scale: isActive ? [1, 1.5, 1] : 1
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        repeat: isActive ? Infinity : 0,
-                        delay: goalIndex * 0.1
-                      }}
-                      whileHover={{ scale: 2 }}
-                    />
-                    <span className={isActive ? "text-foreground" : ""}>
-                      {goal}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Timeline Node */}
-      <div className="w-2/12 flex justify-center">
-        <motion.div
-          initial={{ scale: 0, rotate: -180 }}
-          animate={
-            isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }
-          }
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
-          className="relative"
-        >
+      {/* Desktop Layout */}
+      <div className={`hidden md:flex items-center ${
+        isLeft ? "flex-row" : "flex-row-reverse"
+      }`}>
+        {/* Content Card */}
+        <div className={`w-5/12 ${isLeft ? "pr-8" : "pl-8"}`}>
           <motion.div
-            className={`w-16 h-16 rounded-full bg-gradient-to-r ${item.color} shadow-lg flex items-center justify-center relative overflow-hidden`}
-            animate={{
-              scale: isActive ? [1, 1.15, 1] : 1,
-              boxShadow: isActive
-                ? [
-                    "0 0 20px rgba(var(--primary), 0.4)",
-                    "0 0 40px rgba(var(--primary), 0.6)",
-                    "0 0 20px rgba(var(--primary), 0.4)"
-                  ]
-                : "0 4px 16px rgba(0, 0, 0, 0.2)"
+            style={{
+              y: cardY,
+              rotate: cardRotate
             }}
-            transition={{
-              duration: isActive ? 2 : 0.5,
-              repeat: isActive ? Infinity : 0
+            animate={{
+              scale: isActive ? 1.05 : 1,
+              boxShadow: isActive
+                ? "0 20px 40px rgba(var(--primary), 0.3), 0 0 0 2px rgba(var(--primary), 0.2)"
+                : "0 4px 16px rgba(0, 0, 0, 0.1)"
             }}
             whileHover={{
-              scale: 1.25,
-              rotate: 360,
-              boxShadow: "0 0 30px rgba(var(--primary), 0.5)"
+              scale: 1.08,
+              y: -10,
+              rotateY: isLeft ? 5 : -5,
+              transition: { duration: 0.3 }
             }}
+            className={`relative p-6 rounded-2xl backdrop-blur-sm border transition-all duration-500 group ${
+              isActive
+                ? "bg-card border-primary/50 shadow-2xl"
+                : "bg-card/80 border-border/50 shadow-lg hover:shadow-2xl"
+            }`}
           >
-            {/* Enhanced pulsing ring effect for active item */}
-            <motion.div
-              className={`absolute inset-0 rounded-full bg-gradient-to-r ${item.color}`}
-              animate={{
-                scale: isActive ? [1, 2, 1] : [1, 1.5, 1],
-                opacity: isActive ? [0.6, 0, 0.6] : [0.3, 0, 0.3]
-              }}
-              transition={{
-                duration: isActive ? 1.5 : 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-
-            {/* More rotating stars for active item */}
-            {Array.from({ length: isActive ? 6 : 4 }, (_, i) => (
+            {/* Active Glow Effect */}
+            {isActive && (
               <motion.div
-                key={`star-${item.id}-${i}-${
-                  Math.cos((i * Math.PI) / (isActive ? 3 : 2)) * 25
-                }`}
-                className="absolute w-1 h-1 bg-white rounded-full"
+                className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${item.color} opacity-10`}
                 animate={{
-                  rotate: [0, 360],
-                  scale: isActive ? [0, 1.5, 0] : [0, 1, 0]
+                  opacity: [0.1, 0.2, 0.1]
                 }}
-                transition={{
-                  duration: isActive ? 2 : 3,
-                  repeat: Infinity,
-                  delay: i * (isActive ? 0.3 : 0.5),
-                  ease: "linear"
-                }}
-                style={{
-                  transformOrigin: `${
-                    25 + Math.cos((i * Math.PI) / (isActive ? 3 : 2)) * 25
-                  }px ${
-                    25 + Math.sin((i * Math.PI) / (isActive ? 3 : 2)) * 25
-                  }px`
-                }}
+                transition={{ duration: 2, repeat: Infinity }}
               />
-            ))}
+            )}
 
+            {/* Floating particles - more active when highlighted */}
+            <div className="absolute inset-0 overflow-hidden rounded-2xl">
+              {Array.from({ length: isActive ? 5 : 3 }, (_, i) => (
+                <motion.div
+                  key={`particle-${item.id}-${i}-${20 + i * 20}-${30 + i * 15}`}
+                  className={`absolute w-1 h-1 rounded-full ${
+                    isActive ? "bg-primary/50" : "bg-primary/30"
+                  }`}
+                  animate={{
+                    x: [0, 100, 0],
+                    y: [0, -50, 0],
+                    opacity: [0, 1, 0],
+                    scale: isActive ? [1, 1.5, 1] : [1, 1.2, 1]
+                  }}
+                  transition={{
+                    duration: isActive ? 2 + i : 3 + i,
+                    repeat: Infinity,
+                    delay: i * 0.5,
+                    ease: "easeInOut"
+                  }}
+                  style={{
+                    left: `${20 + i * 20}%`,
+                    top: `${30 + i * 15}%`
+                  }}
+                />
+              ))}
+            </div>
+
+            <div className="relative z-10">
+              {/* Desktop Card Content */}
+              <div className="flex items-center gap-3 mb-4">
+                <motion.div
+                  className={`p-3 rounded-xl bg-gradient-to-r ${item.color} shadow-lg`}
+                  animate={{
+                    scale: isActive ? [1, 1.1, 1] : 1,
+                    rotate: isActive ? [0, 5, -5, 0] : 0
+                  }}
+                  transition={{
+                    duration: isActive ? 2 : 0.5,
+                    repeat: isActive ? Infinity : 0
+                  }}
+                  whileHover={{
+                    rotate: 360,
+                    scale: 1.15
+                  }}
+                >
+                  <item.icon className="h-6 w-6 text-white" />
+                </motion.div>
+                <div>
+                  <motion.h3
+                    className={`text-xl font-bold transition-colors duration-300 ${
+                      isActive ? "text-primary" : "text-foreground"
+                    }`}
+                    animate={{
+                      scale: isActive ? [1, 1.02, 1] : 1
+                    }}
+                    transition={{ duration: 2, repeat: isActive ? Infinity : 0 }}
+                  >
+                    {item.phase}
+                  </motion.h3>
+                  <motion.p
+                    className={`text-sm font-medium transition-colors duration-300 ${
+                      isActive ? "text-primary/80" : "text-muted-foreground"
+                    }`}
+                    initial={{ opacity: 0 }}
+                    animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+                    transition={{ delay: index * 0.2 + 0.3 }}
+                  >
+                    {item.timeframe}
+                  </motion.p>
+                </div>
+              </div>
+
+              {/* Skills and Goals sections for desktop */}
+              <div className="mb-4">
+                <motion.h4
+                  className={`text-sm font-semibold mb-2 flex items-center gap-2 transition-colors duration-300 ${
+                    isActive ? "text-primary" : "text-primary/70"
+                  }`}
+                  whileHover={{ x: 5 }}
+                >
+                  <motion.div
+                    animate={{
+                      rotate: isActive ? [0, 360] : 0,
+                      scale: isActive ? [1, 1.2, 1] : 1
+                    }}
+                    transition={{
+                      duration: isActive ? 1.5 : 2,
+                      repeat: isActive ? Infinity : 0,
+                      ease: "linear"
+                    }}
+                  >
+                    <Zap className="h-4 w-4" />
+                  </motion.div>
+                  Core Skills
+                </motion.h4>
+                <div className="space-y-1">
+                  {item.skills.map((skill, skillIndex) => (
+                    <motion.div
+                      key={skill}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={
+                        isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
+                      }
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.2 + skillIndex * 0.1
+                      }}
+                      whileHover={{ x: 10, scale: 1.02 }}
+                      className="text-sm text-muted-foreground flex items-center gap-2 cursor-pointer"
+                    >
+                      <motion.div
+                        className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+                          isActive ? "bg-primary" : "bg-primary/60"
+                        }`}
+                        animate={{
+                          scale: isActive ? [1, 1.5, 1] : 1
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: isActive ? Infinity : 0,
+                          delay: skillIndex * 0.1
+                        }}
+                        whileHover={{ scale: 2 }}
+                      />
+                      <span className={isActive ? "text-foreground" : ""}>
+                        {skill}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <motion.h4
+                  className={`text-sm font-semibold mb-2 flex items-center gap-2 transition-colors duration-300 ${
+                    isActive ? "text-primary" : "text-primary/70"
+                  }`}
+                  whileHover={{ x: 5 }}
+                >
+                  <motion.div
+                    animate={{
+                      scale: isActive ? [1, 1.3, 1] : [1, 1.2, 1],
+                      rotate: isActive ? [0, 15, -15, 0] : [0, 10, -10, 0]
+                    }}
+                    transition={{
+                      duration: isActive ? 1.5 : 2,
+                      repeat: Infinity
+                    }}
+                  >
+                    <Trophy className="h-4 w-4" />
+                  </motion.div>
+                  Key Goals
+                </motion.h4>
+                <div className="space-y-1">
+                  {item.goals.map((goal, goalIndex) => (
+                    <motion.div
+                      key={goal}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={
+                        isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }
+                      }
+                      transition={{
+                        duration: 0.5,
+                        delay: index * 0.2 + goalIndex * 0.1 + 0.3
+                      }}
+                      whileHover={{ x: 10, scale: 1.02 }}
+                      className="text-sm text-muted-foreground flex items-center gap-2 cursor-pointer"
+                    >
+                      <motion.div
+                        className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+                          isActive ? "bg-secondary" : "bg-secondary/60"
+                        }`}
+                        animate={{
+                          scale: isActive ? [1, 1.5, 1] : 1
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: isActive ? Infinity : 0,
+                          delay: goalIndex * 0.1
+                        }}
+                        whileHover={{ scale: 2 }}
+                      />
+                      <span className={isActive ? "text-foreground" : ""}>
+                        {goal}
+                      </span>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Timeline Node */}
+        <div className="w-2/12 flex justify-center">
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={
+              isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }
+            }
+            transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
+            className="relative"
+          >
             <motion.div
+              className={`w-16 h-16 rounded-full bg-gradient-to-r ${item.color} shadow-lg flex items-center justify-center relative overflow-hidden`}
               animate={{
-                rotate: isActive ? [0, 360] : 0,
-                scale: isActive ? [1, 1.1, 1] : 1
+                scale: isActive ? [1, 1.15, 1] : 1,
+                boxShadow: isActive
+                  ? [
+                      "0 0 20px rgba(var(--primary), 0.4)",
+                      "0 0 40px rgba(var(--primary), 0.6)",
+                      "0 0 20px rgba(var(--primary), 0.4)"
+                    ]
+                  : "0 4px 16px rgba(0, 0, 0, 0.2)"
               }}
               transition={{
-                duration: isActive ? 3 : 0.5,
-                repeat: isActive ? Infinity : 0,
-                ease: "linear"
+                duration: isActive ? 2 : 0.5,
+                repeat: isActive ? Infinity : 0
+              }}
+              whileHover={{
+                scale: 1.25,
+                rotate: 360,
+                boxShadow: "0 0 30px rgba(var(--primary), 0.5)"
               }}
             >
-              <item.icon className="h-8 w-8 text-white relative z-10" />
-            </motion.div>
-          </motion.div>
-
-          {/* Connecting Line with animated progress */}
-          {index < roadmapData.length - 1 && (
-            <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-0.5 h-16 bg-gradient-to-b from-border to-transparent overflow-hidden">
+              {/* Enhanced pulsing ring effect for active item */}
               <motion.div
-                className="w-full bg-gradient-to-b from-primary to-transparent"
-                initial={{ height: 0 }}
-                animate={isInView ? { height: "100%" } : { height: 0 }}
-                transition={{ duration: 1, delay: index * 0.2 + 0.5 }}
+                className={`absolute inset-0 rounded-full bg-gradient-to-r ${item.color}`}
+                animate={{
+                  scale: isActive ? [1, 2, 1] : [1, 1.5, 1],
+                  opacity: isActive ? [0.6, 0, 0.6] : [0.3, 0, 0.3]
+                }}
+                transition={{
+                  duration: isActive ? 1.5 : 2,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
               />
-            </div>
-          )}
-        </motion.div>
+
+              {/* More rotating stars for active item */}
+              {Array.from({ length: isActive ? 6 : 4 }, (_, i) => (
+                <motion.div
+                  key={`star-${item.id}-${i}-${
+                    Math.cos((i * Math.PI) / (isActive ? 3 : 2)) * 25
+                  }`}
+                  className="absolute w-1 h-1 bg-white rounded-full"
+                  animate={{
+                    rotate: [0, 360],
+                    scale: isActive ? [0, 1.5, 0] : [0, 1, 0]
+                  }}
+                  transition={{
+                    duration: isActive ? 2 : 3,
+                    repeat: Infinity,
+                    delay: i * (isActive ? 0.3 : 0.5),
+                    ease: "linear"
+                  }}
+                  style={{
+                    transformOrigin: `${
+                      25 + Math.cos((i * Math.PI) / (isActive ? 3 : 2)) * 25
+                    }px ${
+                      25 + Math.sin((i * Math.PI) / (isActive ? 3 : 2)) * 25
+                    }px`
+                  }}
+                />
+              ))}
+
+              <motion.div
+                animate={{
+                  rotate: isActive ? [0, 360] : 0,
+                  scale: isActive ? [1, 1.1, 1] : 1
+                }}
+                transition={{
+                  duration: isActive ? 3 : 0.5,
+                  repeat: isActive ? Infinity : 0,
+                  ease: "linear"
+                }}
+              >
+                <item.icon className="h-8 w-8 text-white relative z-10" />
+              </motion.div>
+            </motion.div>
+
+            {/* Connecting Line with animated progress */}
+            {index < roadmapData.length - 1 && (
+              <div className="absolute top-16 left-1/2 transform -translate-x-1/2 w-0.5 h-16 bg-gradient-to-b from-border to-transparent overflow-hidden">
+                <motion.div
+                  className="w-full bg-gradient-to-b from-primary to-transparent"
+                  initial={{ height: 0 }}
+                  animate={isInView ? { height: "100%" } : { height: 0 }}
+                  transition={{ duration: 1, delay: index * 0.2 + 0.5 }}
+                />
+              </div>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Empty Space for Opposite Side */}
+        <div className="w-5/12" />
       </div>
 
-      {/* Empty Space for Opposite Side */}
-      <div className="w-5/12" />
+      {/* Mobile Layout */}
+      <div className="md:hidden flex gap-4">
+        {/* Timeline Node for Mobile */}
+        <div className="flex-shrink-0">
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            animate={
+              isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }
+            }
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="relative"
+          >
+            <motion.div
+              className={`w-12 h-12 rounded-full bg-gradient-to-r ${item.color} shadow-lg flex items-center justify-center relative overflow-hidden`}
+              animate={{
+                scale: isActive ? [1, 1.1, 1] : 1,
+                boxShadow: isActive
+                  ? [
+                      "0 0 15px rgba(var(--primary), 0.4)",
+                      "0 0 25px rgba(var(--primary), 0.6)",
+                      "0 0 15px rgba(var(--primary), 0.4)"
+                    ]
+                  : "0 2px 8px rgba(0, 0, 0, 0.2)"
+              }}
+              transition={{
+                duration: isActive ? 2 : 0.5,
+                repeat: isActive ? Infinity : 0
+              }}
+            >
+              <item.icon className="h-6 w-6 text-white" />
+            </motion.div>
+
+            {/* Connecting Line for Mobile */}
+            {index < roadmapData.length - 1 && (
+              <div className="absolute top-12 left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-gradient-to-b from-border to-transparent overflow-hidden">
+                <motion.div
+                  className="w-full bg-gradient-to-b from-primary to-transparent"
+                  initial={{ height: 0 }}
+                  animate={isInView ? { height: "100%" } : { height: 0 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
+                />
+              </div>
+            )}
+          </motion.div>
+        </div>
+
+        {/* Content Card for Mobile */}
+        <div className="flex-1 min-w-0">
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={
+              isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }
+            }
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className={`relative p-4 rounded-xl backdrop-blur-sm border transition-all duration-300 ${
+              isActive
+                ? "bg-card border-primary/50 shadow-lg"
+                : "bg-card/80 border-border/50 shadow-md"
+            }`}
+          >
+            {/* Mobile Card Content */}
+            <div className="mb-3">
+              <h3 className={`text-lg font-bold mb-1 ${
+                isActive ? "text-primary" : "text-foreground"
+              }`}>
+                {item.phase}
+              </h3>
+              <p className={`text-sm font-medium ${
+                isActive ? "text-primary/80" : "text-muted-foreground"
+              }`}>
+                {item.timeframe}
+              </p>
+            </div>
+
+            {/* Mobile Skills */}
+            <div className="mb-3">
+              <h4 className="text-sm font-semibold mb-2 text-primary/80 flex items-center gap-1">
+                <Zap className="h-3 w-3" />
+                Skills
+              </h4>
+              <div className="text-xs text-muted-foreground">
+                {item.skills.slice(0, 3).map((skill) => (
+                  <div key={skill} className="flex items-center gap-1 mb-1">
+                    <div className="w-1 h-1 rounded-full bg-primary/60" />
+                    <span>{skill}</span>
+                  </div>
+                ))}
+                {item.skills.length > 3 && (
+                  <div className="text-xs text-muted-foreground/70 mt-1">
+                    +{item.skills.length - 3} more skills
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Mobile Goals */}
+            <div>
+              <h4 className="text-sm font-semibold mb-2 text-primary/80 flex items-center gap-1">
+                <Trophy className="h-3 w-3" />
+                Goals
+              </h4>
+              <div className="text-xs text-muted-foreground">
+                {item.goals.slice(0, 2).map((goal) => (
+                  <div key={goal} className="flex items-center gap-1 mb-1">
+                    <div className="w-1 h-1 rounded-full bg-secondary/60" />
+                    <span>{goal}</span>
+                  </div>
+                ))}
+                {item.goals.length > 2 && (
+                  <div className="text-xs text-muted-foreground/70 mt-1">
+                    +{item.goals.length - 2} more goals
+                  </div>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
     </motion.div>
   );
 };
@@ -558,7 +678,7 @@ export default function CareerRoadmap() {
   return (
     <section
       id="roadmap"
-      className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative py-20 overflow-hidden no-overflow"
       ref={ref}
     >
       {/* Animated Background */}
@@ -593,7 +713,7 @@ export default function CareerRoadmap() {
         ))}
       </div>
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="container-responsive relative z-10 overflow-hidden">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -650,8 +770,8 @@ export default function CareerRoadmap() {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Central Line with animated gradient */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary/50 via-primary/30 to-transparent overflow-hidden">
+          {/* Central Line with animated gradient - Desktop only */}
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-primary/50 via-primary/30 to-transparent overflow-hidden">
             <motion.div
               className="w-full bg-gradient-to-b from-primary to-secondary"
               initial={{ height: 0 }}
