@@ -10,7 +10,7 @@ import Image from "next/image";
 
 export default function Introduce() {
   const scrollToAbout = () => {
-    document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
+    document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -95,8 +95,6 @@ export default function Introduce() {
                       "a Full Stack Developer",
                       2000,
                       "a Software Engineer",
-                      2000,
-                      "a Problem Solver",
                       2000
                     ]}
                     wrapper="span"
@@ -115,11 +113,12 @@ export default function Introduce() {
               </h1>
 
               <p className="text-responsive-base sm:text-responsive-lg text-muted-foreground max-w-2xl leading-relaxed mx-auto lg:mx-0">
-                Passionate Full Stack Developer specializing in modern web
-                technologies and scalable applications. I craft efficient,
-                secure solutions using React, Node.js, TypeScript, and
-                cutting-edge frameworks. Committed to delivering exceptional
-                user experiences and innovative digital solutions.
+                I am a passionate and dedicated Full Stack Developer just
+                starting my career. I enjoy solving problems, learning new
+                skills, and building meaningful applications that provide great
+                user experiences. I am eager to grow, collaborate with teams,
+                and contribute to innovative projects that make a positive
+                impact.
               </p>
             </motion.div>
 

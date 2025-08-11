@@ -1,8 +1,5 @@
 import { Experience } from "@/types";
-import {
-  Code,
-  University
-} from "lucide-react";
+import { Code, University } from "lucide-react";
 
 export const experiences: Experience[] = [
   {
@@ -12,9 +9,8 @@ export const experiences: Experience[] = [
     company: "FPT University, Ha Noi",
     description: [
       "Major: Software Engineering with focus on Full Stack Development",
-      "GPA: 3.2/4.0 - Strong academic performance in core CS subjects",
       "Active member of FU Debate Club - Enhanced communication and analytical skills",
-      "Completed advanced courses in Data Structures, Algorithms, and Database Design"
+      "Completed courses in Data Structures, Algorithms, and Database Design"
     ],
     icon: University
   },
@@ -39,7 +35,7 @@ export const personalInfo = {
   birthDate: "05/07/2003",
   location: "Ha Noi",
   careerObjectives: [
-    "Secure a position as a Full Stack Developer where I can apply my expertise in modern web technologies and software engineering to create innovative, scalable solutions that drive business growth and user engagement.",
-    "Evolve into a senior technical role, leading development teams in building next-generation web applications and scalable software solutions, while contributing to open-source projects and staying at the forefront of emerging technologies."
+    "Secure an entry-level Full Stack Developer position where I can apply my skills in software development, continue learning, and contribute to creating useful and engaging applications.",
+    "Grow into a more advanced technical role by collaborating with experienced developers, improving my abilities, and contributing to impactful projects that benefit users and the community."
   ]
 };

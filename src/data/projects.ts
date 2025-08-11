@@ -10,8 +10,12 @@ export const projects: Project[] = [
   {
     id: 1,
     title: "Learning Management System",
-    description: "A comprehensive web-based platform for creating, managing, and delivering online courses.",
-    longDescription: "A comprehensive web-based platform for creating, managing, and delivering online courses. Features real-time interactions, progress tracking, automated assessments, and advanced analytics dashboard for instructors and administrators.",
+    description:
+      "A comprehensive web-based platform for creating, managing, and delivering online courses.",
+    longDescription:
+      "A comprehensive web-based platform for creating, managing, and delivering online courses. Features real-time interactions, progress tracking, automated assessments, and advanced analytics dashboard for instructors and administrators.",
+    members: 1,
+    position: "Developer",
     image: "/projects/lms.png",
     technologies: [
       "TypeScript",
@@ -31,8 +35,12 @@ export const projects: Project[] = [
   {
     id: 2,
     title: "Employee Management System",
-    description: "Enterprise-grade web application for streamlining HR operations.",
-    longDescription: "Enterprise-grade web application for streamlining HR operations. Features role-based access control, employee profile management, attendance tracking, and comprehensive reporting with data visualization.",
+    description:
+      "Enterprise-grade web application for streamlining HR operations.",
+    longDescription:
+      "Enterprise-grade web application for streamlining HR operations. Features role-based access control, employee profile management, attendance tracking, and comprehensive reporting with data visualization.",
+    members: 6,
+    position: "Developer",
     image: "/projects/mes.png",
     technologies: [
       "JavaScript",
@@ -52,8 +60,12 @@ export const projects: Project[] = [
   {
     id: 3,
     title: "Quizzy Learning Platform",
-    description: "Interactive learning platform with AI-powered quiz generation.",
-    longDescription: "Interactive learning platform with AI-powered quiz generation, spaced repetition algorithms, and collaborative study groups. Features real-time multiplayer quizzes and comprehensive learning analytics.",
+    description:
+      "Interactive learning platform with AI-powered quiz generation.",
+    longDescription:
+      "Interactive learning platform with AI-powered quiz generation, spaced repetition algorithms, and collaborative study groups. Features real-time multiplayer quizzes and comprehensive learning analytics.",
+    members: 6,
+    position: "Developer",
     image: "/projects/qw.png",
     technologies: [
       "JavaScript",

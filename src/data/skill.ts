@@ -23,15 +23,11 @@ import {
   SiCss3,
   SiJavascript,
   SiBootstrap,
-  SiAndroid,
   SiGithub,
   SiGitlab,
-  SiLaravel,
   SiJira,
   SiCypress,
-  SiPostman,
-  SiNestjs,
-  SiPostgresql
+  SiPostman
 } from "react-icons/si";
 
 export const skillCategories = [
@@ -52,24 +48,24 @@ export const skillCategories = [
     title: "Backend",
     skills: [
       { name: "Java", icon: FaJava, color: "#007396" },
-      { name: "Go", icon: FaGolang, color: "#00ADD8" },
-      { name: "PHP", icon: FaPhp, color: "#777BB4" },
-      { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
+      // { name: "Go", icon: FaGolang, color: "#00ADD8" },
+      // { name: "PHP", icon: FaPhp, color: "#777BB4" },
+      // { name: "Laravel", icon: SiLaravel, color: "#FF2D20" },
       { name: "Node.js", icon: SiNodedotjs, color: "#339933" },
-      { name: "Express.js", icon: SiExpress, color: "#000000" },
-      { name: "NestJS", icon: SiNestjs, color: "#E0234E" }
+      { name: "Express.js", icon: SiExpress, color: "#000000" }
+      // { name: "NestJS", icon: SiNestjs, color: "#E0234E" }
     ]
   },
-  {
-    title: "Mobile",
-    skills: [{ name: "Android", icon: SiAndroid, color: "#3DDC84" }]
-  },
+  // {
+  //   title: "Mobile",
+  //   skills: [{ name: "Android", icon: SiAndroid, color: "#3DDC84" }]
+  // },
   {
     title: "Database",
     skills: [
       { name: "MSSQL", icon: DiMsqlServer, color: "#CC2927" },
       { name: "MySQL", icon: GrMysql, color: "#4479A1" },
-      { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
+      // { name: "PostgreSQL", icon: SiPostgresql, color: "#336791" },
       { name: "MongoDB", icon: SiMongodb, color: "#47A248" },
       { name: "Redis", icon: DiRedis, color: "#DC382D" }
     ]

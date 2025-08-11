@@ -22,8 +22,8 @@ export default function About() {
             About Me
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Dedicated Full Stack Developer with expertise in modern web
-            technologies and software engineering.
+            Dedicated Full Stack Developer eager to grow skills in software
+            engineering and build impactful applications.
           </p>
         </motion.div>
 

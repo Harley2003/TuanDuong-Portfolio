@@ -30,13 +30,15 @@ export interface Project {
   title: string;
   description: string;
   longDescription: string;
+  members: number;
+  position: string;
   image: string;
   technologies: string[];
   liveUrl?: string;
   githubUrl?: string;
   category: string;
   featured: boolean;
-  status: 'completed' | 'in-progress' | 'planned';
+  status: "completed" | "in-progress" | "planned";
 }
 
 export interface ProjectCategory {
@@ -53,8 +55,8 @@ export interface RoadmapItem {
   description: string;
   achievements: string[];
   technologies: string[];
-  type: 'education' | 'work' | 'certification' | 'project';
-  status: 'completed' | 'current' | 'planned';
+  type: "education" | "work" | "certification" | "project";
+  status: "completed" | "current" | "planned";
   icon: LucideIcon;
   color: string;
 }
@@ -69,7 +71,7 @@ export interface Certificate {
   image: string;
   credentialUrl?: string;
   skills: string[];
-  type: 'certification' | 'course' | 'achievement';
+  type: "certification" | "course" | "achievement";
 }
 
 // Skill Types (already exists but we'll keep it consistent)

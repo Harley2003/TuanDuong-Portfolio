@@ -2,7 +2,12 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useMemo, useEffect } from "react";
-import { ExternalLink, GitBranch, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ExternalLink,
+  GitBranch,
+  ChevronLeft,
+  ChevronRight
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ImageWithTheme, ProjectCard } from "@/components/theme";
 import { projects, projectCategories } from "@/data";
@@ -111,7 +116,7 @@ export default function ProjectSection() {
                   alt={project.title}
                   width={600}
                   height={400}
-                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-64 object-cover object-top transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -143,6 +148,20 @@ export default function ProjectSection() {
                 <p className="text-muted-foreground mb-4">
                   {project.description}
                 </p>
+                <div className="flex flex-col gap-2 mb-4">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">
+                      👥 Members:
+                    </span>{" "}
+                    {project.members}
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">
+                      💼 Position:
+                    </span>{" "}
+                    {project.position}
+                  </p>
+                </div>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span

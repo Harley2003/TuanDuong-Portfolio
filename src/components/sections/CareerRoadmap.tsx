@@ -746,7 +746,7 @@ export default function CareerRoadmap() {
             transition={{ delay: 0.3 }}
           >
             My long-term career development plan in Software Engineering - from
-            Junior Developer to Engineering Leadership
+            Junior Developer to Engineering Leadership.
           </motion.p>
           <motion.div
             className="mt-6 flex items-center justify-center gap-2"

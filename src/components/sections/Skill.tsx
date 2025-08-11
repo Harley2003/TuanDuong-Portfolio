@@ -34,11 +34,10 @@ export default function Skill() {
             My Skills
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Specialized in full-stack development with expertise in modern web technologies 
-            and software engineering. Proficient in building scalable applications using React, 
-            Node.js, TypeScript, and modern backend frameworks. 
-            Passionate about creating secure, efficient, and innovative digital experiences 
-            with clean, maintainable code and exceptional user interfaces.
+            Aspiring Full Stack Developer with a strong foundation in software
+            development and a passion for building functional, user-friendly
+            applications. Committed to writing clean, maintainable code and
+            creating secure, efficient, and engaging digital experiences.
           </p>
         </motion.div>
 

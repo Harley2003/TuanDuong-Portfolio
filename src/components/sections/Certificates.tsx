@@ -72,7 +72,7 @@ export default function Certificates() {
                   src={cert.image}
                   alt={cert.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className="object-contain transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div className="p-6">
